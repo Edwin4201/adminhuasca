@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget createDrawerBodyItem(
     {required IconData icon,
@@ -12,7 +13,7 @@ Widget createDrawerBodyItem(
           child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(text,
-                  style: const TextStyle(
+                  style: GoogleFonts.spaceGrotesk(
                       fontWeight: FontWeight.bold,
                       color: Colors.green,
                       fontSize: 15))),

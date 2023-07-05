@@ -2,6 +2,7 @@ import 'package:adminhuasca/navigationDrawer/navigationdrawer.dart';
 import 'package:adminhuasca/widgets/mostrar_alerta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LugaresScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _LugaresScreenState extends State<LugaresScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(FontAwesomeIcons.plus),
         onPressed: () {
           mostrarAlerta(
             context,
@@ -43,6 +44,8 @@ class _LugaresScreenState extends State<LugaresScreen> {
             "Agregar un nuevo lugar cuidadosamente",
             "Agregar",
             () {
+              Navigator.of(context, rootNavigator: true).pop();
+
               Navigator.pushNamed(context, "agregarlugar");
             },
           );
@@ -117,7 +120,7 @@ class LugarItem extends StatelessWidget {
                 itemCount: 5,
                 itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => Icon(
-                  Icons.star,
+                  FontAwesomeIcons.star,
                   color: Colors.lightGreenAccent,
                 ),
                 onRatingUpdate: (rating) {
@@ -143,11 +146,12 @@ class LugarItem extends StatelessWidget {
                         context,
                         "¡No tocar!",
                         "Usar esta función solo para emergencias",
-                        "Borrar",
-                        () {});
+                        "Borrar", () {
+                      Navigator.of(context, rootNavigator: true).pop();
+                    });
                   },
                   icon: Icon(
-                    Icons.delete,
+                    FontAwesomeIcons.trash,
                     color: Colors.red,
                   ),
                   label: Text(
@@ -162,11 +166,12 @@ class LugarItem extends StatelessWidget {
                         context,
                         "¡No tocar!",
                         "Usar esta función solo para emergencias",
-                        "Editar",
-                        () {});
+                        "Editar", () {
+                      Navigator.of(context, rootNavigator: true).pop();
+                    });
                   },
                   icon: Icon(
-                    Icons.edit,
+                    FontAwesomeIcons.solidPenToSquare,
                     color: Colors.green,
                   ),
                   label: Text(

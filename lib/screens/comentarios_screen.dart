@@ -2,6 +2,7 @@ import 'package:adminhuasca/navigationDrawer/navigationdrawer.dart';
 import 'package:adminhuasca/widgets/mostrar_alerta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ComentariosScreen extends StatelessWidget {
@@ -75,7 +76,7 @@ class ComentarioItem extends StatelessWidget {
                 itemCount: 5,
                 itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => Icon(
-                  Icons.star,
+                  FontAwesomeIcons.star,
                   color: Colors.lightGreenAccent,
                 ),
                 onRatingUpdate: (rating) {
@@ -105,10 +106,12 @@ class ComentarioItem extends StatelessWidget {
                       backgroundColor: MaterialStatePropertyAll(Colors.black)),
                   onPressed: () {
                     mostrarAlerta(context, "¡Atención!",
-                        "Desea rechazar este comentario?", "Aceptar", () {});
+                        "Desea rechazar este comentario?", "Aceptar", () {
+                      Navigator.of(context, rootNavigator: true).pop();
+                    });
                   },
                   icon: Icon(
-                    Icons.delete,
+                    FontAwesomeIcons.trash,
                     color: Colors.red,
                   ),
                   label: Text(
@@ -120,10 +123,12 @@ class ComentarioItem extends StatelessWidget {
                       backgroundColor: MaterialStatePropertyAll(Colors.black)),
                   onPressed: () {
                     mostrarAlerta(context, "¡Atención!",
-                        "Desea aceptar este comentario?", "Aceptar", () {});
+                        "Desea aceptar este comentario?", "Aceptar", () {
+                      Navigator.of(context, rootNavigator: true).pop();
+                    });
                   },
                   icon: Icon(
-                    Icons.check_circle,
+                    FontAwesomeIcons.check,
                     color: Colors.green,
                   ),
                   label: Text(
