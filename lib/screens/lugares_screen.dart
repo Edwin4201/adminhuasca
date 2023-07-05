@@ -2,6 +2,7 @@ import 'package:adminhuasca/navigationDrawer/navigationdrawer.dart';
 import 'package:adminhuasca/widgets/mostrar_alerta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LugaresScreen extends StatefulWidget {
   static const String routeName = '/Lugares';
@@ -20,9 +21,9 @@ class _LugaresScreenState extends State<LugaresScreen> {
       appBar: AppBar(
           backgroundColor: Colors.black,
           elevation: 0,
-          foregroundColor: Colors.white,
+          foregroundColor: Colors.green,
           shadowColor: Colors.black,
-          title: Text("gestionar lugares")),
+          title: Text("Gestionar lugares")),
       drawer: Navigationdrawer(),
       body: ListView(
         children: [
@@ -39,13 +40,15 @@ class _LugaresScreenState extends State<LugaresScreen> {
           mostrarAlerta(
             context,
             "¡Atención!",
-            "Agregar un nuevo lugar",
+            "Agregar un nuevo lugar cuidadosamente",
             "Agregar",
-            () {},
+            () {
+              Navigator.pushNamed(context, "agregarlugar");
+            },
           );
         },
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.orange,
+        foregroundColor: Colors.black,
       ),
     );
   }
@@ -62,7 +65,7 @@ class LugarItem extends StatelessWidget {
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[900],
           borderRadius: BorderRadius.circular(20),
           border: Border.all()),
       child: Column(
@@ -73,13 +76,23 @@ class LugarItem extends StatelessWidget {
               CircleAvatar(
                 backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
-                child: Text("32987"),
+                child: Text(
+                  "32987",
+                  style:
+                      GoogleFonts.spaceGrotesk(color: Colors.lightGreenAccent),
+                ),
                 radius: 40,
               ),
               Column(
                 children: [
-                  Text("Huasca"),
-                  Text("Hidalgo"),
+                  Text(
+                    "Huasca   ",
+                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  ),
+                  Text(
+                    "Hidalgo  ",
+                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  ),
                 ],
               ),
             ],
@@ -88,7 +101,9 @@ class LugarItem extends StatelessWidget {
             children: [
               Expanded(
                   child: Text(
-                      "centro ecoturistico el bosque de las truchas kjrew ekjrewjk rkejrh"))
+                "centro ecoturistico el bosque de las truchas kjrew ekjrewjk rkejrh",
+                style: GoogleFonts.spaceGrotesk(color: Colors.green),
+              ))
             ],
           ),
           Row(
@@ -103,13 +118,17 @@ class LugarItem extends StatelessWidget {
                 itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => Icon(
                   Icons.star,
-                  color: Colors.amber,
+                  color: Colors.lightGreenAccent,
                 ),
                 onRatingUpdate: (rating) {
                   print(rating);
                 },
               ),
-              Expanded(child: Text("10,72727\n visitas"))
+              Expanded(
+                  child: Text(
+                "10,72727\n visitas",
+                style: GoogleFonts.spaceGrotesk(color: Colors.green),
+              ))
             ],
           ),
           Row(
@@ -118,7 +137,7 @@ class LugarItem extends StatelessWidget {
             children: [
               FilledButton.icon(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.red)),
+                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
                   onPressed: () {
                     mostrarAlerta(
                         context,
@@ -127,11 +146,17 @@ class LugarItem extends StatelessWidget {
                         "Borrar",
                         () {});
                   },
-                  icon: Icon(Icons.delete),
-                  label: Text("Borrar")),
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                  label: Text(
+                    "Borrar",
+                    style: GoogleFonts.spaceGrotesk(color: Colors.red),
+                  )),
               FilledButton.icon(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.green)),
+                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
                   onPressed: () {
                     mostrarAlerta(
                         context,
@@ -140,8 +165,14 @@ class LugarItem extends StatelessWidget {
                         "Editar",
                         () {});
                   },
-                  icon: Icon(Icons.edit),
-                  label: Text("Editar"))
+                  icon: Icon(
+                    Icons.edit,
+                    color: Colors.green,
+                  ),
+                  label: Text(
+                    "Editar",
+                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  ))
             ],
           ),
         ],

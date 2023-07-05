@@ -2,6 +2,7 @@ import 'package:adminhuasca/navigationDrawer/navigationdrawer.dart';
 import 'package:adminhuasca/widgets/mostrar_alerta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ComentariosScreen extends StatelessWidget {
   static const String routeName = '/Comentarios';
@@ -15,7 +16,7 @@ class ComentariosScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        foregroundColor: Colors.white,
+        foregroundColor: Colors.green,
         shadowColor: Colors.black,
         title: Text("1,765 Restantes"),
       ),
@@ -41,19 +42,28 @@ class ComentarioItem extends StatelessWidget {
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey[900],
           borderRadius: BorderRadius.circular(20),
           border: Border.all()),
       child: Column(
         children: [
-          Text("Bosque encantado"),
+          Text(
+            "Bosque encantado",
+            style: GoogleFonts.spaceGrotesk(color: Colors.green),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: [
-                  Text("24/06/95"),
-                  Text("10:00:00"),
+                  Text(
+                    "24/06/95",
+                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  ),
+                  Text(
+                    "10:00:00",
+                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  ),
                 ],
               ),
               RatingBar.builder(
@@ -66,7 +76,7 @@ class ComentarioItem extends StatelessWidget {
                 itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => Icon(
                   Icons.star,
-                  color: Colors.amber,
+                  color: Colors.lightGreenAccent,
                 ),
                 onRatingUpdate: (rating) {
                   print(rating);
@@ -74,31 +84,52 @@ class ComentarioItem extends StatelessWidget {
               ),
             ],
           ),
-          Divider(),
+          Divider(
+            color: Colors.black,
+            thickness: 5,
+          ),
           Text(
             "# 343",
+            style: GoogleFonts.spaceGrotesk(color: Colors.white),
             textAlign: TextAlign.left,
           ),
           Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop ."),
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop .",
+            style: GoogleFonts.spaceGrotesk(color: Colors.green),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               FilledButton.icon(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.red)),
-                  onPressed: () {},
-                  icon: Icon(Icons.delete),
-                  label: Text("Rechazar")),
+                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
+                  onPressed: () {
+                    mostrarAlerta(context, "¡Atención!",
+                        "Desea rechazar este comentario?", "Aceptar", () {});
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                  label: Text(
+                    "Rechazar",
+                    style: GoogleFonts.spaceGrotesk(color: Colors.red),
+                  )),
               FilledButton.icon(
                   style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.green)),
+                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
                   onPressed: () {
                     mostrarAlerta(context, "¡Atención!",
                         "Desea aceptar este comentario?", "Aceptar", () {});
                   },
-                  icon: Icon(Icons.check_circle),
-                  label: Text("Aceptar")),
+                  icon: Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                  ),
+                  label: Text(
+                    "Aceptar",
+                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  )),
             ],
           )
         ],

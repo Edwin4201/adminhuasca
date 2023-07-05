@@ -1,5 +1,6 @@
 import 'package:adminhuasca/routes/pageroutes.dart';
 import 'package:adminhuasca/screens/comentarios_screen.dart';
+import 'package:adminhuasca/screens/lugares_agregar_screen.dart';
 import 'package:adminhuasca/screens/lugares_screen.dart';
 import 'package:adminhuasca/screens/top_lugares_screen.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         PageRoutes.top: (context) => const TopLugaresScreen(),
         PageRoutes.comentarios: (context) => const ComentariosScreen(),
         PageRoutes.lugares: (context) => const LugaresScreen(),
+        "agregarlugar": (context) => LugaresAgregarScreen()
       },
     );
   }

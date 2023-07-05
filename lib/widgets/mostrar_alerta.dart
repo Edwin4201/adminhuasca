@@ -65,6 +65,7 @@ mostrarAlerta(BuildContext context, String titulo, String subtitulo,
                   child: Text(
                     textoBoton,
                     style: TextStyle(
+                        color: Colors.green,
                         fontSize: MediaQuery.of(context).size.width >= 600
                             ? MediaQuery.of(context).size.width * 0.03
                             : 16),
@@ -78,6 +79,7 @@ mostrarAlerta(BuildContext context, String titulo, String subtitulo,
                   child: Text(
                     "Cancelar",
                     style: TextStyle(
+                        color: Colors.red,
                         fontSize: MediaQuery.of(context).size.width >= 600
                             ? MediaQuery.of(context).size.width * 0.03
                             : 16),
