@@ -1,9 +1,17 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:adminhuasca/global/enviroment.dart';
+import 'package:adminhuasca/models/lugares.dart';
 import 'package:adminhuasca/navigationDrawer/navigationdrawer.dart';
+import 'package:adminhuasca/widgets/error_internet_dialog.dart';
 import 'package:adminhuasca/widgets/mostrar_alerta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
 class LugaresScreen extends StatefulWidget {
   static const String routeName = '/Lugares';
@@ -15,8 +23,48 @@ class LugaresScreen extends StatefulWidget {
 }
 
 class _LugaresScreenState extends State<LugaresScreen> {
+  List<Lugares> lugares = [];
+
   @override
   Widget build(BuildContext context) {
+    Future<List<Lugares>> cargarLugares() async {
+      try {
+        final url = Uri.parse(
+          '${Environment.apiUrl}/api/v1/lugar',
+        );
+        final resp = await http.get(
+          url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            "apikey": Environment.basicAuth
+          },
+        );
+        if (resp.statusCode == 200) {
+          final Lugares estadosMap = Lugares.fromJson(jsonDecode(resp.body));
+          if (this.mounted) {
+            setState(() {
+              lugares = [estadosMap];
+            });
+          }
+        } else {
+          // La petición falló con un código de estado no exitoso
+          throw Exception('Failed to load post');
+        }
+
+        return lugares;
+      } on TimeoutException catch (_) {
+        throw ('Tiempo de espera alcanzado');
+      } on SocketException {
+        throw ('Sin internet  o falla de servidor ');
+      } on HttpException {
+        throw ("No se encontro esa peticion");
+      } on FormatException {
+        throw ("Formato erroneo ");
+      }
+    }
+
+    cargarLugares();
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -27,13 +75,21 @@ class _LugaresScreenState extends State<LugaresScreen> {
           title: Text("Gestionar lugares")),
       drawer: Navigationdrawer(),
       body: ListView(
-        children: [
-          LugarItem(),
-          LugarItem(),
-          LugarItem(),
-          LugarItem(),
-          LugarItem(),
-        ],
+        children: lugares.isEmpty
+            ? []
+            : List.generate(
+                lugares[0].response.length,
+                (index) => LugarItem(
+                      idLugar: lugares[0].response[index].idLugar.toString(),
+                      nombre: lugares[0].response[index].nombre,
+                      idEstado: lugares[0].response[index].idEstado.toString(),
+                      estrellas:
+                          lugares[0].response[index].estrellas.toString(),
+                      totalComentarios: lugares[0]
+                          .response[index]
+                          .totalComentarios
+                          .toString(),
+                    )),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(FontAwesomeIcons.plus),
@@ -58,8 +114,19 @@ class _LugaresScreenState extends State<LugaresScreen> {
 }
 
 class LugarItem extends StatelessWidget {
+  final String idLugar;
+  final String nombre;
+  final String idEstado;
+  final String estrellas;
+  final String totalComentarios;
+
   const LugarItem({
     super.key,
+    required this.idLugar,
+    required this.nombre,
+    required this.idEstado,
+    required this.estrellas,
+    required this.totalComentarios,
   });
 
   @override
@@ -76,27 +143,26 @@ class LugarItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CircleAvatar(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-                child: Text(
-                  "32987",
-                  style:
-                      GoogleFonts.spaceGrotesk(color: Colors.lightGreenAccent),
-                ),
-                radius: 40,
+              Text(
+                "Id=$idLugar",
+                style: GoogleFonts.spaceGrotesk(color: Colors.lightGreenAccent),
               ),
-              Column(
-                children: [
-                  Text(
-                    "Huasca   ",
-                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
-                  ),
-                  Text(
-                    "Hidalgo  ",
-                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
-                  ),
-                ],
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                nombre,
+                style: GoogleFonts.spaceGrotesk(color: Colors.green),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                "Estado: $idEstado",
+                style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                textAlign: TextAlign.left,
               ),
             ],
           ),
@@ -104,7 +170,7 @@ class LugarItem extends StatelessWidget {
             children: [
               Expanded(
                   child: Text(
-                "centro ecoturistico el bosque de las truchas kjrew ekjrewjk rkejrh",
+                "Comentarios= $totalComentarios",
                 style: GoogleFonts.spaceGrotesk(color: Colors.green),
               ))
             ],
@@ -113,7 +179,7 @@ class LugarItem extends StatelessWidget {
             children: [
               RatingBar.builder(
                 ignoreGestures: true,
-                initialRating: 3,
+                initialRating: double.parse(estrellas),
                 minRating: 0,
                 direction: Axis.horizontal,
                 allowHalfRating: false,
@@ -127,11 +193,6 @@ class LugarItem extends StatelessWidget {
                   print(rating);
                 },
               ),
-              Expanded(
-                  child: Text(
-                "10,72727\n visitas",
-                style: GoogleFonts.spaceGrotesk(color: Colors.green),
-              ))
             ],
           ),
           Row(
@@ -148,6 +209,61 @@ class LugarItem extends StatelessWidget {
                         "Usar esta función solo para emergencias",
                         "Borrar", () {
                       Navigator.of(context, rootNavigator: true).pop();
+
+                      Future borrarEjercicio() async {
+                        try {
+                          final response = await http.delete(
+                              Uri.parse(
+                                  '${Environment.apiUrl}/api/v1/lugar/$idLugar'),
+                              headers: {"apikey": Environment.basicAuth});
+                          if (response.statusCode == 200) {
+                            final snackBar = SnackBar(
+                              duration: const Duration(seconds: 3),
+                              content: const Text(
+                                'Lugar eliminado',
+                              ),
+                              action: SnackBarAction(
+                                label: idLugar,
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                            Navigator.pushReplacementNamed(context, "lugares");
+                          } else {
+                            if (response.statusCode == 400) {
+                              final snackBar = SnackBar(
+                                backgroundColor: Colors.red,
+                                duration: const Duration(seconds: 5),
+                                content: const Text(
+                                  "No se puede eliminar este lugar ya que tiene visitas asociadas",
+                                ),
+                                action: SnackBarAction(
+                                  label: '',
+                                  onPressed: () {
+                                    // Some code to undo the change.
+                                  },
+                                ),
+                              );
+
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                              return;
+                            } else {
+                              // Si esta respuesta no fue OK, lanza un error.
+                              throw Exception('Failed to load post');
+                            }
+                          }
+                        } on SocketException {
+                          errorinternetdialog(
+                            context,
+                          );
+                        }
+                      }
+
+                      borrarEjercicio();
                     });
                   },
                   icon: Icon(
@@ -168,6 +284,13 @@ class LugarItem extends StatelessWidget {
                         "Usar esta función solo para emergencias",
                         "Editar", () {
                       Navigator.of(context, rootNavigator: true).pop();
+                      Navigator.pushNamed(context, "editarlugar", arguments: {
+                        "id": idLugar,
+                        "nombre": nombre,
+                        "idestado": idEstado,
+                        "estrellas": estrellas,
+                        "totalcomentarios": totalComentarios,
+                      });
                     });
                   },
                   icon: Icon(

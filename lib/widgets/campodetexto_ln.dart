@@ -38,12 +38,14 @@ class CampoDeTextoLn extends StatelessWidget {
           onChanged: onCambio,
           readOnly: isreadOnly!,
           style: TextStyle(
+              color: Colors.green,
               fontSize: MediaQuery.of(context).size.width >= 600
                   ? MediaQuery.of(context).size.width * .028
                   : 16),
           //  enabled: enabled,
           maxLines: maximasLineas,
           maxLength: largo,
+          cursorColor: Colors.green,
           decoration: InputDecoration(
             prefix: Padding(
               padding: const EdgeInsets.only(right: 5),
@@ -52,6 +54,7 @@ class CampoDeTextoLn extends StatelessWidget {
             label: Text(label),
             floatingLabelAlignment: FloatingLabelAlignment.center,
             floatingLabelStyle: TextStyle(
+                color: Colors.green,
                 fontSize: MediaQuery.of(context).size.width >= 600
                     ? MediaQuery.of(context).size.width * .035
                     : 18),
@@ -59,15 +62,15 @@ class CampoDeTextoLn extends StatelessWidget {
 
             hintText: "Ingresa $label",
             filled: true,
-            fillColor: Colors.white,
+            fillColor: Colors.black,
             border: const OutlineInputBorder(),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(color: Colors.blue[400]!, width: 2.0),
+              borderSide: BorderSide(color: Colors.green[400]!, width: 2.0),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(color: Colors.blue, width: 2.0),
+              borderSide: const BorderSide(color: Colors.green, width: 2.0),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
