@@ -37,8 +37,9 @@ class Response {
   final int idLugar;
   final String nombre;
   final int idEstado;
-  final int estrellas;
+  final double estrellas;
   final int totalComentarios;
+  final int totalVisitas;
 
   Response({
     required this.idLugar,
@@ -46,6 +47,7 @@ class Response {
     required this.idEstado,
     required this.estrellas,
     required this.totalComentarios,
+    required this.totalVisitas,
   });
 
   factory Response.fromRawJson(String str) =>
@@ -57,8 +59,9 @@ class Response {
         idLugar: json["id_lugar"],
         nombre: json["nombre"],
         idEstado: json["id_estado"],
-        estrellas: json["estrellas"],
+        estrellas: json["estrellas"]?.toDouble(),
         totalComentarios: json["total_comentarios"],
+        totalVisitas: json["total_visitas"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -67,5 +70,6 @@ class Response {
         "id_estado": idEstado,
         "estrellas": estrellas,
         "total_comentarios": totalComentarios,
+        "total_visitas": totalVisitas,
       };
 }

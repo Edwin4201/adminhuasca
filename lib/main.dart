@@ -4,6 +4,7 @@ import 'package:adminhuasca/screens/lugares_agregar_screen.dart';
 import 'package:adminhuasca/screens/lugares_editar_screen.dart';
 import 'package:adminhuasca/screens/lugares_screen.dart';
 import 'package:adminhuasca/screens/top_lugares_screen.dart';
+import 'package:adminhuasca/screens/visitas_lugar_screen.dart';
 import 'package:adminhuasca/services/estados_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,11 +54,13 @@ class MyApp extends StatelessWidget {
                 behavior: SnackBarBehavior.floating,
                 showCloseIcon: true,
                 closeIconColor: Colors.white)),
+        debugShowCheckedModeBanner: false,
         home: ComentariosScreen(),
         routes: {
           PageRoutes.top: (context) => const TopLugaresScreen(),
           PageRoutes.comentarios: (context) => const ComentariosScreen(),
           PageRoutes.lugares: (context) => const LugaresScreen(),
+          PageRoutes.visitasLugar: (context) => const VisitasLugarScreen(),
           "agregarlugar": (context) => LugaresAgregarScreen(),
           "editarlugar": (context) => LugaresEditarScreen(),
           "lugares": (context) => LugaresScreen()

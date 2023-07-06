@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:adminhuasca/global/enviroment.dart';
 import 'package:adminhuasca/models/lugares.dart';
 import 'package:adminhuasca/navigationDrawer/navigationdrawer.dart';
 import 'package:flutter/material.dart';
@@ -9,18 +10,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-import '../global/enviroment.dart';
+class VisitasLugarScreen extends StatefulWidget {
+  static const String routeName = '/VisitasLugar';
 
-class TopLugaresScreen extends StatefulWidget {
-  static const String routeName = '/Top';
-
-  const TopLugaresScreen({super.key});
+  const VisitasLugarScreen({super.key});
 
   @override
-  State<TopLugaresScreen> createState() => _TopLugaresScreenState();
+  State<VisitasLugarScreen> createState() => _VisitasLugarScreenState();
 }
 
-class _TopLugaresScreenState extends State<TopLugaresScreen> {
+class _VisitasLugarScreenState extends State<VisitasLugarScreen> {
   List<Lugares> lugares = [];
 
   @override
@@ -28,7 +27,7 @@ class _TopLugaresScreenState extends State<TopLugaresScreen> {
     Future<List<Lugares>> cargarLugares() async {
       try {
         final url = Uri.parse(
-          '${Environment.apiUrl}/api/v1/lugar/porcalificacion',
+          '${Environment.apiUrl}/api/v1/lugar/porvisitas',
         );
         final resp = await http.get(
           url,
@@ -68,7 +67,7 @@ class _TopLugaresScreenState extends State<TopLugaresScreen> {
         backgroundColor: Colors.black,
         elevation: 0,
         foregroundColor: Colors.green,
-        title: Text("Top lugares por calificación"),
+        title: Text("Visitas por lugar"),
       ),
       drawer: Navigationdrawer(),
       body: ListView(
@@ -78,13 +77,16 @@ class _TopLugaresScreenState extends State<TopLugaresScreen> {
             : List.generate(
                 lugares[0].response.length,
                 (index) => _LugaresItem(
-                    nombre: lugares[0].response[index].nombre,
-                    calificacion:
-                        lugares[0].response[index].estrellas.toString(),
-                    total: lugares[0]
-                        .response[index]
-                        .totalComentarios
-                        .toString())),
+                      nombre: lugares[0].response[index].nombre,
+                      calificacion:
+                          lugares[0].response[index].estrellas.toString(),
+                      total: lugares[0]
+                          .response[index]
+                          .totalComentarios
+                          .toString(),
+                      visitas:
+                          lugares[0].response[index].totalVisitas.toString(),
+                    )),
       ),
     );
   }
@@ -95,12 +97,14 @@ class _LugaresItem extends StatelessWidget {
   final String calificacion;
 
   final String total;
+  final String visitas;
 
   const _LugaresItem({
     super.key,
     required this.nombre,
     required this.calificacion,
     required this.total,
+    required this.visitas,
   });
 
   @override
@@ -111,6 +115,10 @@ class _LugaresItem extends StatelessWidget {
         children: [
           Text(
             nombre,
+            style: GoogleFonts.spaceGrotesk(color: Colors.green),
+          ),
+          Text(
+            "Total de visitantes: $visitas",
             style: GoogleFonts.spaceGrotesk(color: Colors.green),
           ),
           Row(
@@ -125,7 +133,7 @@ class _LugaresItem extends StatelessWidget {
                 style: GoogleFonts.spaceGrotesk(color: Colors.green),
               ),
               Text(
-                " ($total)",
+                " Total de reseñas: $total",
                 style: GoogleFonts.spaceGrotesk(color: Colors.green),
               )
             ],

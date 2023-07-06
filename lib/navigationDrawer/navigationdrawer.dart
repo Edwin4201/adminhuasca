@@ -31,22 +31,22 @@ class Navigationdrawer extends StatelessWidget {
           ),
           createDrawerBodyItem(
             icon: FontAwesomeIcons.star,
-            text: '¿Top lugares por calificación?',
+            text: 'Top lugares por calificación',
             onTap: () =>
                 Navigator.pushReplacementNamed(context, PageRoutes.top),
           ),
           createDrawerBodyItem(
             icon: FontAwesomeIcons.peopleGroup,
-            text: 'Top lugares por numero de visitas',
-            onTap: () =>
-                Navigator.pushReplacementNamed(context, PageRoutes.top),
+            text: 'Top lugares por visitantes',
+            onTap: () => Navigator.pushReplacementNamed(
+                context, PageRoutes.visitasLugar),
           ),
-          createDrawerBodyItem(
+          /*       createDrawerBodyItem(
             icon: FontAwesomeIcons.carSide,
             text: 'Medios de transporte',
             onTap: () =>
                 Navigator.pushReplacementNamed(context, PageRoutes.top),
-          ),
+          ), */
           const Divider(
             color: Colors.grey,
           ),

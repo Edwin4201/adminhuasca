@@ -182,7 +182,7 @@ class LugarItem extends StatelessWidget {
                 initialRating: double.parse(estrellas),
                 minRating: 0,
                 direction: Axis.horizontal,
-                allowHalfRating: false,
+                allowHalfRating: true,
                 itemCount: 5,
                 itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => Icon(
