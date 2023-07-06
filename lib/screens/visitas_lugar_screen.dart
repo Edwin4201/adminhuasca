@@ -67,7 +67,7 @@ class _VisitasLugarScreenState extends State<VisitasLugarScreen> {
         backgroundColor: Colors.black,
         elevation: 0,
         foregroundColor: Colors.green,
-        title: Text("Visitas por lugar"),
+        title: Text("Visitantes por lugar"),
       ),
       drawer: Navigationdrawer(),
       body: ListView(
@@ -76,16 +76,24 @@ class _VisitasLugarScreenState extends State<VisitasLugarScreen> {
             ? []
             : List.generate(
                 lugares[0].response.length,
-                (index) => _LugaresItem(
-                      nombre: lugares[0].response[index].nombre,
-                      calificacion:
-                          lugares[0].response[index].estrellas.toString(),
-                      total: lugares[0]
-                          .response[index]
-                          .totalComentarios
-                          .toString(),
-                      visitas:
-                          lugares[0].response[index].totalVisitas.toString(),
+                (index) => GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, "visitasdetalles",
+                            arguments: {
+                              "idlugar": lugares[0].response[index].idLugar
+                            });
+                      },
+                      child: _LugaresItem(
+                        nombre: lugares[0].response[index].nombre,
+                        calificacion:
+                            lugares[0].response[index].estrellas.toString(),
+                        total: lugares[0]
+                            .response[index]
+                            .totalComentarios
+                            .toString(),
+                        visitas:
+                            lugares[0].response[index].totalVisitas.toString(),
+                      ),
                     )),
       ),
     );

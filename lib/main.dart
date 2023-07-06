@@ -4,6 +4,7 @@ import 'package:adminhuasca/screens/lugares_agregar_screen.dart';
 import 'package:adminhuasca/screens/lugares_editar_screen.dart';
 import 'package:adminhuasca/screens/lugares_screen.dart';
 import 'package:adminhuasca/screens/top_lugares_screen.dart';
+import 'package:adminhuasca/screens/visitas_detalles_screen.dart';
 import 'package:adminhuasca/screens/visitas_lugar_screen.dart';
 import 'package:adminhuasca/services/estados_service.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,8 @@ class MyApp extends StatelessWidget {
           PageRoutes.visitasLugar: (context) => const VisitasLugarScreen(),
           "agregarlugar": (context) => LugaresAgregarScreen(),
           "editarlugar": (context) => LugaresEditarScreen(),
-          "lugares": (context) => LugaresScreen()
+          "lugares": (context) => LugaresScreen(),
+          "visitasdetalles": (context) => VisitasDetallesScreen()
         },
       ),
     );
