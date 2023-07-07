@@ -77,14 +77,22 @@ class _TopLugaresScreenState extends State<TopLugaresScreen> {
             ? []
             : List.generate(
                 lugares[0].response.length,
-                (index) => _LugaresItem(
-                    nombre: lugares[0].response[index].nombre,
-                    calificacion:
-                        lugares[0].response[index].estrellas.toString(),
-                    total: lugares[0]
-                        .response[index]
-                        .totalComentarios
-                        .toString())),
+                (index) => GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, "visitasdetalles",
+                            arguments: {
+                              "idlugar": lugares[0].response[index].idLugar
+                            });
+                      },
+                      child: _LugaresItem(
+                          nombre: lugares[0].response[index].nombre,
+                          calificacion:
+                              lugares[0].response[index].estrellas.toString(),
+                          total: lugares[0]
+                              .response[index]
+                              .totalComentarios
+                              .toString()),
+                    )),
       ),
     );
   }

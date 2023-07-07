@@ -1,6 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:adminhuasca/global/enviroment.dart';
+import 'package:adminhuasca/models/estadisticas_visitas_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:http/http.dart' as http;
 
 class VisitasDetallesScreen extends StatefulWidget {
   const VisitasDetallesScreen({super.key});
@@ -10,10 +17,49 @@ class VisitasDetallesScreen extends StatefulWidget {
 }
 
 class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
+  List<EstadisticaVisitas> estadisticas = [];
+
   @override
   Widget build(BuildContext context) {
     Map parametros = ModalRoute.of(context)!.settings.arguments as Map;
+    Future<List<EstadisticaVisitas>> cargarLugares() async {
+      try {
+        final url = Uri.parse(
+          '${Environment.apiUrl}/api/v1/visita/estadistica/${parametros["idlugar"]}',
+        );
+        final resp = await http.get(
+          url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            "apikey": Environment.basicAuth
+          },
+        );
+        if (resp.statusCode == 200) {
+          final EstadisticaVisitas estadosMap =
+              EstadisticaVisitas.fromJson(jsonDecode(resp.body));
+          if (this.mounted) {
+            setState(() {
+              estadisticas = [estadosMap];
+            });
+          }
+        } else {
+          // La petición falló con un código de estado no exitoso
+          throw Exception('Failed to load post');
+        }
 
+        return estadisticas;
+      } on TimeoutException catch (_) {
+        throw ('Tiempo de espera alcanzado');
+      } on SocketException {
+        throw ('Sin internet  o falla de servidor ');
+      } on HttpException {
+        throw ("No se encontro esa peticion");
+      } on FormatException {
+        throw ("Formato erroneo ");
+      }
+    }
+
+    cargarLugares();
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -24,31 +70,44 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
       ),
       body: ListView(
         padding: EdgeInsets.only(left: 10, right: 10),
-        children: [
-          _GraficaItem(
-              titulo: "¿Es un lugar seguro?",
-              data: {"si": 5, "No": 3},
-              colores: [Colors.blue, Colors.red]),
-          _GraficaItem(
-              titulo: "¿Ha visitado este lugar antes?",
-              data: {"si": 7, "No": 3},
-              colores: [Colors.blue, Colors.red]),
-          _GraficaItem(
-              titulo: "¿Regresaria a este lugar?",
-              data: {"si": 8, "No": 3},
-              colores: [Colors.blue, Colors.red]),
-          _GraficaItem(titulo: "Medios de transporte", data: {
-            "Auto propio": 10,
-            "transporte público": 7,
-            "Autobús turístico": 2,
-            "Otro": 1
-          }, colores: [
-            Colors.blue,
-            Colors.red,
-            Colors.green,
-            Colors.pink
-          ])
-        ],
+        children: estadisticas.isEmpty
+            ? []
+            : [
+                _GraficaItem(titulo: "¿Es un lugar seguro?", data: {
+                  "Si": double.parse(estadisticas[0].totalSeguros),
+                  "No": double.parse(estadisticas[0].totalNoSeguros)
+                }, colores: [
+                  Colors.blue,
+                  Colors.red
+                ]),
+                _GraficaItem(titulo: "¿Ha visitado este lugar antes?", data: {
+                  "Si": double.parse(estadisticas[0].totalsivisitaprevia),
+                  "No": double.parse(estadisticas[0].totalnovisitaprevia)
+                }, colores: [
+                  Colors.blue,
+                  Colors.red
+                ]),
+                _GraficaItem(titulo: "¿Regresaria a este lugar?", data: {
+                  "Si": double.parse(estadisticas[0].totalsiregresara),
+                  "No": double.parse(estadisticas[0].totalnoregresara)
+                }, colores: [
+                  Colors.blue,
+                  Colors.red
+                ]),
+                _GraficaItem(titulo: "Medios de transporte", data: {
+                  "Auto propio": double.parse(estadisticas[0].totalautopropio),
+                  "transporte público":
+                      double.parse(estadisticas[0].totaltransportepublico),
+                  "Autobús turístico":
+                      double.parse(estadisticas[0].totalautobusturistico),
+                  "Otro": double.parse(estadisticas[0].totalotro),
+                }, colores: [
+                  Colors.blue,
+                  Colors.red,
+                  Colors.green,
+                  Colors.pink
+                ])
+              ],
       ),
     );
   }
