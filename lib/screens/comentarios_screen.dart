@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:adminhuasca/global/enviroment.dart';
 import 'package:adminhuasca/models/com_no_revisados.dart';
 import 'package:adminhuasca/navigationDrawer/navigationdrawer.dart';
+import 'package:adminhuasca/widgets/error_internet_dialog.dart';
 import 'package:adminhuasca/widgets/mostrar_alerta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -214,6 +215,62 @@ class ComentarioItem extends StatelessWidget {
                     mostrarAlerta(context, "¡Atención!",
                         "Desea rechazar este comentario?", "Aceptar", () {
                       Navigator.of(context, rootNavigator: true).pop();
+                      Future rechazarComentario() async {
+                        try {
+                          final response = await http.put(
+                              Uri.parse(
+                                  '${Environment.apiUrl}/api/v1/comentarios/norevisados/${idComentario}'),
+                              body: {
+                                "aceptado": false.toString(),
+                                "revisado": true.toString(),
+                              },
+                              headers: {
+                                "apikey": Environment.basicAuth
+                              });
+
+                          if (response.statusCode == 200) {
+                            final snackBar = SnackBar(
+                              backgroundColor: Colors.red,
+                              duration: const Duration(seconds: 3),
+                              content: const Text('Comentario rechazado'),
+                              action: SnackBarAction(
+                                label: "",
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                            //   Navigator.pushReplacementNamed(context, "lugares");
+                          } else {
+                            if (response.statusCode == 401) {
+                              mostrarAlerta(context, 'Registro incorrecto',
+                                  "El ID ya existe", "ok", () {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop();
+                              });
+                            } else {
+                              mostrarAlerta(
+                                  context,
+                                  'Registro incorrecto',
+                                  " Introduzca los datos cerrectamente",
+                                  "ok", () {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop();
+                              });
+                              return;
+                            }
+                          }
+                        } on SocketException {
+                          errorinternetdialog(
+                            context,
+                          );
+                        }
+                      }
+
+                      rechazarComentario();
                     });
                   },
                   icon: Icon(
@@ -231,6 +288,61 @@ class ComentarioItem extends StatelessWidget {
                     mostrarAlerta(context, "¡Atención!",
                         "Desea aceptar este comentario?", "Aceptar", () {
                       Navigator.of(context, rootNavigator: true).pop();
+                      Future aceptarComentario() async {
+                        try {
+                          final response = await http.put(
+                              Uri.parse(
+                                  '${Environment.apiUrl}/api/v1/comentarios/norevisados/${idComentario}'),
+                              body: {
+                                "aceptado": true.toString(),
+                                "revisado": true.toString(),
+                              },
+                              headers: {
+                                "apikey": Environment.basicAuth
+                              });
+
+                          if (response.statusCode == 200) {
+                            final snackBar = SnackBar(
+                              duration: const Duration(seconds: 3),
+                              content: const Text('Comentario aceptado'),
+                              action: SnackBarAction(
+                                label: "",
+                                onPressed: () {
+                                  // Some code to undo the change.
+                                },
+                              ),
+                            );
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                            //   Navigator.pushReplacementNamed(context, "lugares");
+                          } else {
+                            if (response.statusCode == 401) {
+                              mostrarAlerta(context, 'Registro incorrecto',
+                                  "El ID ya existe", "ok", () {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop();
+                              });
+                            } else {
+                              mostrarAlerta(
+                                  context,
+                                  'Registro incorrecto',
+                                  " Introduzca los datos cerrectamente",
+                                  "ok", () {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop();
+                              });
+                              return;
+                            }
+                          }
+                        } on SocketException {
+                          errorinternetdialog(
+                            context,
+                          );
+                        }
+                      }
+
+                      aceptarComentario();
                     });
                   },
                   icon: Icon(
