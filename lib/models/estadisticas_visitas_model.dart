@@ -16,6 +16,12 @@ class EstadisticaVisitas {
   final String totaltransportepublico;
   final String totalautobusturistico;
   final String totalotro;
+  final String uno;
+  final String dos;
+  final String tres;
+  final String cuatro;
+  final String cinco;
+  final String totalresenas;
 
   EstadisticaVisitas({
     required this.message,
@@ -29,6 +35,12 @@ class EstadisticaVisitas {
     required this.totaltransportepublico,
     required this.totalautobusturistico,
     required this.totalotro,
+    required this.uno,
+    required this.dos,
+    required this.tres,
+    required this.cuatro,
+    required this.cinco,
+    required this.totalresenas,
   });
 
   factory EstadisticaVisitas.fromRawJson(String str) =>
@@ -49,6 +61,12 @@ class EstadisticaVisitas {
         totaltransportepublico: json["totaltransportepublico"],
         totalautobusturistico: json["totalautobusturistico"],
         totalotro: json["totalotro"],
+        uno: json["uno"],
+        dos: json["dos"],
+        tres: json["tres"],
+        cuatro: json["cuatro"],
+        cinco: json["cinco"],
+        totalresenas: json["totalresenas"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -63,5 +81,11 @@ class EstadisticaVisitas {
         "totaltransportepublico": totaltransportepublico,
         "totalautobusturistico": totalautobusturistico,
         "totalotro": totalotro,
+        "uno": uno,
+        "dos": dos,
+        "tres": tres,
+        "cuatro": cuatro,
+        "cinco": cinco,
+        "totalresenas": totalresenas,
       };
 }
