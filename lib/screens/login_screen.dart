@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -96,46 +97,6 @@ class _LoginScreenState extends State<LoginScreen> {
         : null;
   }
 
-  Future<void> _authenticateWithBiometrics() async {
-    bool authenticated = false;
-    try {
-      setState(() {
-        _isAuthenticating = true;
-        _authorized = 'Authenticating';
-      });
-      authenticated = await auth.authenticate(
-        localizedReason:
-            'Scan your fingerprint (or face or whatever) to authenticate',
-        options: const AuthenticationOptions(
-          stickyAuth: true,
-          biometricOnly: true,
-        ),
-      );
-      setState(() {
-        _isAuthenticating = false;
-        _authorized = 'Authenticating';
-      });
-    } on PlatformException catch (e) {
-      print(e);
-      setState(() {
-        _isAuthenticating = false;
-        _authorized = 'Error - ${e.message}';
-      });
-      return;
-    }
-    if (!mounted) {
-      return;
-    }
-
-    final String message = authenticated ? 'Authorized' : 'Not Authorized';
-    setState(() {
-      _authorized = message;
-    });
-    _authorized == "Authorized"
-        ? Navigator.pushReplacementNamed(context, "auth")
-        : null;
-  }
-
   Future<void> _cancelAuthentication() async {
     await auth.stopAuthentication();
     setState(() => _isAuthenticating = false);
@@ -144,8 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          title: Text("Auth"),
+          backgroundColor: Colors.black,
         ),
         body: ListView(
           padding: const EdgeInsets.only(top: 30),
@@ -156,24 +118,53 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (_supportState == _SupportState.unknown)
                   const CircularProgressIndicator()
                 else if (_supportState == _SupportState.supported)
-                  const Text('Este dispositivo es compatible')
+                  Text(
+                    'Este dispositivo es compatible',
+                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  )
                 else
-                  const Text('Este dispositivo no es compatible'),
-                const Divider(height: 100),
+                  Text(
+                    'Este dispositivo no es compatible',
+                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  ),
+                const Divider(
+                  height: 100,
+                  color: Colors.lightGreenAccent,
+                ),
                 Text(
-                    'Puede comprobar datos biométricos: $_canCheckBiometrics\n'),
+                  'Puede comprobar datos biométricos: $_canCheckBiometrics\n',
+                  style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white),
                   onPressed: _checkBiometrics,
                   child: const Text('Comprobar datos biométricos'),
                 ),
-                const Divider(height: 100),
-                Text('Biometría disponible: $_availableBiometrics\n'),
+                const Divider(
+                  height: 100,
+                  color: Colors.lightGreenAccent,
+                ),
+                Text(
+                  'Biometría disponible: $_availableBiometrics\n',
+                  style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                ),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white),
                   onPressed: _getAvailableBiometrics,
                   child: const Text('Obtenga datos biométricos disponibles'),
                 ),
-                const Divider(height: 100),
-                Text('Estado actual: $_authorized\n'),
+                const Divider(
+                  height: 100,
+                  color: Colors.lightGreenAccent,
+                ),
+                Text(
+                  'Estado actual: $_authorized\n',
+                  style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                ),
                 if (_isAuthenticating)
                   ElevatedButton(
                     onPressed: _cancelAuthentication,
@@ -191,26 +182,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     children: <Widget>[
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            foregroundColor: Colors.white),
                         onPressed: _authenticate,
                         // TODO(goderbauer): Make this const when this package requires Flutter 3.8 or later.
                         // ignore: prefer_const_constructors
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: const <Widget>[
-                            Text('Autenticar'),
-                            Icon(Icons.perm_device_information),
-                          ],
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: _authenticateWithBiometrics,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Text(_isAuthenticating
-                                ? 'Cancel'
-                                : 'Autenticar: solo datos biométricos'),
-                            const Icon(Icons.fingerprint),
+                            Icon(
+                              Icons.fingerprint,
+                              size: 50,
+                            ),
                           ],
                         ),
                       ),
