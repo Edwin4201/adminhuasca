@@ -1,5 +1,6 @@
 import 'package:adminhuasca/routes/pageroutes.dart';
 import 'package:adminhuasca/screens/comentarios_screen.dart';
+import 'package:adminhuasca/screens/login_screen.dart';
 import 'package:adminhuasca/screens/lugares_agregar_screen.dart';
 import 'package:adminhuasca/screens/lugares_editar_screen.dart';
 import 'package:adminhuasca/screens/lugares_screen.dart';
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
                 showCloseIcon: true,
                 closeIconColor: Colors.white)),
         debugShowCheckedModeBanner: false,
-        home: ComentariosScreen(),
+        home: LoginScreen(),
         routes: {
           PageRoutes.top: (context) => const TopLugaresScreen(),
           PageRoutes.comentarios: (context) => const ComentariosScreen(),
@@ -65,7 +66,8 @@ class MyApp extends StatelessWidget {
           "agregarlugar": (context) => LugaresAgregarScreen(),
           "editarlugar": (context) => LugaresEditarScreen(),
           "lugares": (context) => LugaresScreen(),
-          "visitasdetalles": (context) => VisitasDetallesScreen()
+          "visitasdetalles": (context) => VisitasDetallesScreen(),
+          "auth": (context) => ComentariosScreen()
         },
       ),
     );
