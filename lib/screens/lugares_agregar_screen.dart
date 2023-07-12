@@ -37,10 +37,10 @@ class _LugaresAgregarScreenState extends State<LugaresAgregarScreen> {
         backgroundColor: Colors.black,
         elevation: 0,
         foregroundColor: Colors.green,
-        title: Text("Agregar nuevo lugar"),
+        title: const Text("Agregar nuevo lugar"),
       ),
       body: ListView(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           left: 10,
           right: 10,
           top: 10,
@@ -124,7 +124,7 @@ class _LugaresAgregarScreenState extends State<LugaresAgregarScreen> {
                 ],
               )),
           FilledButton.icon(
-              style: ButtonStyle(
+              style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(Colors.orange)),
               onPressed: () {
                 if (_formKey1.currentState!.validate()) {
@@ -199,7 +199,7 @@ class _LugaresAgregarScreenState extends State<LugaresAgregarScreen> {
                   });
                 }
               },
-              icon: Icon(
+              icon: const Icon(
                 FontAwesomeIcons.check,
                 color: Colors.black,
               ),

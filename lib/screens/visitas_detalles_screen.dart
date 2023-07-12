@@ -41,7 +41,7 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
         if (resp.statusCode == 200) {
           final EstadisticaVisitas estadosMap =
               EstadisticaVisitas.fromJson(jsonDecode(resp.body));
-          if (this.mounted) {
+          if (mounted) {
             setState(() {
               estadisticas = [estadosMap];
             });
@@ -79,7 +79,7 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
         if (resp.statusCode == 200) {
           final ComNoRevisados estadosMap =
               ComNoRevisados.fromJson(jsonDecode(resp.body));
-          if (this.mounted) {
+          if (mounted) {
             setState(() {
               comentariosNoRevisados = [estadosMap];
             });
@@ -110,28 +110,28 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
         title: Text("Estadisticas ${parametros["idlugar"]}"),
       ),
       body: ListView(
-        padding: EdgeInsets.only(left: 10, right: 10),
+        padding: const EdgeInsets.only(left: 10, right: 10),
         children: estadisticas.isEmpty
             ? []
             : [
                 _GraficaItem(titulo: "¿Es un lugar seguro?", data: {
                   "Si": double.parse(estadisticas[0].totalSeguros),
                   "No": double.parse(estadisticas[0].totalNoSeguros)
-                }, colores: [
+                }, colores: const [
                   Colors.blue,
                   Colors.red
                 ]),
                 _GraficaItem(titulo: "¿Ha visitado este lugar antes?", data: {
                   "Si": double.parse(estadisticas[0].totalsivisitaprevia),
                   "No": double.parse(estadisticas[0].totalnovisitaprevia)
-                }, colores: [
+                }, colores: const [
                   Colors.blue,
                   Colors.red
                 ]),
                 _GraficaItem(titulo: "¿Regresaria a este lugar?", data: {
                   "Si": double.parse(estadisticas[0].totalsiregresara),
                   "No": double.parse(estadisticas[0].totalnoregresara)
-                }, colores: [
+                }, colores: const [
                   Colors.blue,
                   Colors.red
                 ]),
@@ -142,7 +142,7 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                   "Autobús turístico":
                       double.parse(estadisticas[0].totalautobusturistico),
                   "Otro": double.parse(estadisticas[0].totalotro),
-                }, colores: [
+                }, colores: const [
                   Colors.blue,
                   Colors.red,
                   Colors.green,
@@ -201,15 +201,15 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                     ? Container()
                     : Container(
                         height: 300,
-                        margin: EdgeInsets.only(bottom: 10),
-                        padding: EdgeInsets.all(25),
+                        margin: const EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.all(25),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Colors.lightGreenAccent)),
                         child: ListView(
                           children: List.generate(
                               comentariosNoRevisados[0].response.length,
-                              (index) => _comentarioItem(
+                              (index) => _ComentarioItem(
                                   comentario: comentariosNoRevisados[0]
                                       .response[index]
                                       .comentario,
@@ -225,11 +225,10 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
   }
 }
 
-class _comentarioItem extends StatelessWidget {
+class _ComentarioItem extends StatelessWidget {
   final String comentario;
   final String calif;
-  const _comentarioItem({
-    super.key,
+  const _ComentarioItem({
     required this.comentario,
     required this.calif,
   });
@@ -237,9 +236,9 @@ class _comentarioItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.all(25),
-      decoration: BoxDecoration(),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(25),
+      decoration: const BoxDecoration(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,7 +249,7 @@ class _comentarioItem extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(
+              const Icon(
                 FontAwesomeIcons.star,
                 color: Colors.yellow,
               ),
@@ -260,7 +259,7 @@ class _comentarioItem extends StatelessWidget {
               ),
             ],
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );
@@ -272,7 +271,6 @@ class _GraficaItem extends StatelessWidget {
   final Map<String, double> data;
   final List<Color> colores;
   const _GraficaItem({
-    super.key,
     required this.titulo,
     required this.data,
     required this.colores,
@@ -281,8 +279,8 @@ class _GraficaItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      padding: EdgeInsets.all(25),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(25),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: Colors.lightGreenAccent)),
@@ -299,7 +297,7 @@ class _GraficaItem extends StatelessWidget {
           PieChart(
             dataMap: data,
 
-            animationDuration: Duration(seconds: 2),
+            animationDuration: const Duration(seconds: 2),
             chartLegendSpacing: 32,
             chartRadius: MediaQuery.of(context).size.width / 4,
             colorList: colores,
@@ -307,7 +305,7 @@ class _GraficaItem extends StatelessWidget {
             chartType: ChartType.disc,
             ringStrokeWidth: 32,
             //  centerText: "HYBRID",
-            legendOptions: LegendOptions(
+            legendOptions: const LegendOptions(
               showLegendsInRow: false,
               legendPosition: LegendPosition.right,
               showLegends: true,
@@ -315,7 +313,7 @@ class _GraficaItem extends StatelessWidget {
               legendTextStyle:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
             ),
-            chartValuesOptions: ChartValuesOptions(
+            chartValuesOptions: const ChartValuesOptions(
               showChartValueBackground: true,
               showChartValues: true,
               showChartValuesInPercentage: true,

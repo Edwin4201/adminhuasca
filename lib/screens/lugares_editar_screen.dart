@@ -44,10 +44,10 @@ class _LugaresAgregarScreenState extends State<LugaresEditarScreen> {
         backgroundColor: Colors.black,
         elevation: 0,
         foregroundColor: Colors.green,
-        title: Text("Editar lugar"),
+        title: const Text("Editar lugar"),
       ),
       body: ListView(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           left: 10,
           right: 10,
           top: 10,
@@ -62,7 +62,7 @@ class _LugaresAgregarScreenState extends State<LugaresEditarScreen> {
             },
           ),
           FilledButton.icon(
-              style: ButtonStyle(
+              style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(Colors.orange)),
               onPressed: () {
                 mostrarAlerta(context, "¡Atención!",
@@ -121,7 +121,7 @@ class _LugaresAgregarScreenState extends State<LugaresEditarScreen> {
                   nuevoLugar();
                 });
               },
-              icon: Icon(
+              icon: const Icon(
                 FontAwesomeIcons.upload,
                 color: Colors.black,
               ),

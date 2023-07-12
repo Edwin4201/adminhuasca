@@ -34,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
       canCheckBiometrics = await auth.canCheckBiometrics;
     } on PlatformException catch (e) {
       canCheckBiometrics = false;
-      print(e);
     }
     if (!mounted) {
       return;
@@ -51,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
       availableBiometrics = await auth.getAvailableBiometrics();
     } on PlatformException catch (e) {
       availableBiometrics = <BiometricType>[];
-      print(e);
     }
     if (!mounted) {
       return;
@@ -79,7 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
         _isAuthenticating = false;
       });
     } on PlatformException catch (e) {
-      print(e);
       setState(() {
         _isAuthenticating = false;
         _authorized = 'Error - ${e.message}';
@@ -186,11 +183,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.white),
                         onPressed: _authenticate,
-                        // TODO(goderbauer): Make this const when this package requires Flutter 3.8 or later.
-                        // ignore: prefer_const_constructors
-                        child: Row(
+                        child: const Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Icon(
                               Icons.fingerprint,
                               size: 50,

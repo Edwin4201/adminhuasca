@@ -38,7 +38,7 @@ class _VisitasLugarScreenState extends State<VisitasLugarScreen> {
         );
         if (resp.statusCode == 200) {
           final Lugares estadosMap = Lugares.fromJson(jsonDecode(resp.body));
-          if (this.mounted) {
+          if (mounted) {
             setState(() {
               lugares = [estadosMap];
             });
@@ -67,11 +67,11 @@ class _VisitasLugarScreenState extends State<VisitasLugarScreen> {
         backgroundColor: Colors.black,
         elevation: 0,
         foregroundColor: Colors.green,
-        title: Text("Visitantes por lugar"),
+        title: const Text("Visitantes por lugar"),
       ),
-      drawer: Navigationdrawer(),
+      drawer: const Navigationdrawer(),
       body: ListView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         children: lugares.isEmpty
             ? []
             : List.generate(
@@ -108,7 +108,6 @@ class _LugaresItem extends StatelessWidget {
   final String visitas;
 
   const _LugaresItem({
-    super.key,
     required this.nombre,
     required this.calificacion,
     required this.total,
@@ -117,40 +116,38 @@ class _LugaresItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            nombre,
-            style: GoogleFonts.spaceGrotesk(color: Colors.green),
-          ),
-          Text(
-            "Total de visitantes: $visitas",
-            style: GoogleFonts.spaceGrotesk(color: Colors.green),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Icon(
-                FontAwesomeIcons.star,
-                color: Colors.yellow,
-              ),
-              Text(
-                " " + calificacion.substring(0, 3),
-                style: GoogleFonts.spaceGrotesk(color: Colors.green),
-              ),
-              Text(
-                " Total de reseñas: $total",
-                style: GoogleFonts.spaceGrotesk(color: Colors.green),
-              )
-            ],
-          ),
-          Divider(
-            color: Colors.lightGreenAccent,
-          )
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          nombre,
+          style: GoogleFonts.spaceGrotesk(color: Colors.green),
+        ),
+        Text(
+          "Total de visitantes: $visitas",
+          style: GoogleFonts.spaceGrotesk(color: Colors.green),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Icon(
+              FontAwesomeIcons.star,
+              color: Colors.yellow,
+            ),
+            Text(
+              "  ${calificacion.substring(0, 3)}",
+              style: GoogleFonts.spaceGrotesk(color: Colors.green),
+            ),
+            Text(
+              " Total de reseñas: $total",
+              style: GoogleFonts.spaceGrotesk(color: Colors.green),
+            )
+          ],
+        ),
+        const Divider(
+          color: Colors.lightGreenAccent,
+        )
+      ],
     );
   }
 }

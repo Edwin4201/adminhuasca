@@ -42,7 +42,7 @@ class _ComentariosScreenState extends State<ComentariosScreen> {
         if (resp.statusCode == 200) {
           final ComNoRevisados estadosMap =
               ComNoRevisados.fromJson(jsonDecode(resp.body));
-          if (this.mounted) {
+          if (mounted) {
             setState(() {
               comentariosNoRevisados = [estadosMap];
             });
@@ -76,7 +76,7 @@ class _ComentariosScreenState extends State<ComentariosScreen> {
             ? ""
             : "Por revisar: ${comentariosNoRevisados[0].total.toString()}"),
       ),
-      drawer: Navigationdrawer(),
+      drawer: const Navigationdrawer(),
       body: ListView(
         children: comentariosNoRevisados.isEmpty
             ? []
@@ -126,7 +126,7 @@ class ComentarioItem extends StatelessWidget {
   final String fecha;
   final String hora;
 
-  ComentarioItem({
+  const ComentarioItem({
     super.key,
     required this.idComentario,
     required this.idLugar,
@@ -140,8 +140,8 @@ class ComentarioItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: Colors.grey[900],
           borderRadius: BorderRadius.circular(20),
@@ -175,19 +175,17 @@ class ComentarioItem extends StatelessWidget {
                   direction: Axis.horizontal,
                   allowHalfRating: false,
                   itemCount: 5,
-                  itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                  itemBuilder: (context, _) => Icon(
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => const Icon(
                     FontAwesomeIcons.star,
                     color: Colors.lightGreenAccent,
                   ),
-                  onRatingUpdate: (rating) {
-                    print(rating);
-                  },
+                  onRatingUpdate: (rating) {},
                 ),
               ),
             ],
           ),
-          Divider(
+          const Divider(
             color: Colors.black,
             thickness: 5,
           ),
@@ -209,7 +207,7 @@ class ComentarioItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               FilledButton.icon(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.black)),
                   onPressed: () {
                     mostrarAlerta(context, "¡Atención!",
@@ -219,7 +217,7 @@ class ComentarioItem extends StatelessWidget {
                         try {
                           final response = await http.put(
                               Uri.parse(
-                                  '${Environment.apiUrl}/api/v1/comentarios/norevisados/${idComentario}'),
+                                  '${Environment.apiUrl}/api/v1/comentarios/norevisados/$idComentario'),
                               body: {
                                 "aceptado": false.toString(),
                                 "revisado": true.toString(),
@@ -273,7 +271,7 @@ class ComentarioItem extends StatelessWidget {
                       rechazarComentario();
                     });
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     FontAwesomeIcons.trash,
                     color: Colors.red,
                   ),
@@ -282,7 +280,7 @@ class ComentarioItem extends StatelessWidget {
                     style: GoogleFonts.spaceGrotesk(color: Colors.red),
                   )),
               FilledButton.icon(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.black)),
                   onPressed: () {
                     mostrarAlerta(context, "¡Atención!",
@@ -292,7 +290,7 @@ class ComentarioItem extends StatelessWidget {
                         try {
                           final response = await http.put(
                               Uri.parse(
-                                  '${Environment.apiUrl}/api/v1/comentarios/norevisados/${idComentario}'),
+                                  '${Environment.apiUrl}/api/v1/comentarios/norevisados/$idComentario'),
                               body: {
                                 "aceptado": true.toString(),
                                 "revisado": true.toString(),
@@ -345,7 +343,7 @@ class ComentarioItem extends StatelessWidget {
                       aceptarComentario();
                     });
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     FontAwesomeIcons.check,
                     color: Colors.green,
                   ),

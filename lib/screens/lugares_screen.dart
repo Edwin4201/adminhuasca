@@ -41,7 +41,7 @@ class _LugaresScreenState extends State<LugaresScreen> {
         );
         if (resp.statusCode == 200) {
           final Lugares estadosMap = Lugares.fromJson(jsonDecode(resp.body));
-          if (this.mounted) {
+          if (mounted) {
             setState(() {
               lugares = [estadosMap];
             });
@@ -72,8 +72,8 @@ class _LugaresScreenState extends State<LugaresScreen> {
           elevation: 0,
           foregroundColor: Colors.green,
           shadowColor: Colors.black,
-          title: Text("Gestionar lugares")),
-      drawer: Navigationdrawer(),
+          title: const Text("Gestionar lugares")),
+      drawer: const Navigationdrawer(),
       body: ListView(
         children: lugares.isEmpty
             ? []
@@ -92,7 +92,6 @@ class _LugaresScreenState extends State<LugaresScreen> {
                     )),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(FontAwesomeIcons.plus),
         onPressed: () {
           mostrarAlerta(
             context,
@@ -108,6 +107,7 @@ class _LugaresScreenState extends State<LugaresScreen> {
         },
         backgroundColor: Colors.orange,
         foregroundColor: Colors.black,
+        child: const Icon(FontAwesomeIcons.plus),
       ),
     );
   }
@@ -132,8 +132,8 @@ class LugarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       decoration: BoxDecoration(
           color: Colors.grey[900],
           borderRadius: BorderRadius.circular(20),
@@ -184,14 +184,12 @@ class LugarItem extends StatelessWidget {
                 direction: Axis.horizontal,
                 allowHalfRating: true,
                 itemCount: 5,
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                itemBuilder: (context, _) => Icon(
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(
                   FontAwesomeIcons.star,
                   color: Colors.lightGreenAccent,
                 ),
-                onRatingUpdate: (rating) {
-                  print(rating);
-                },
+                onRatingUpdate: (rating) {},
               ),
             ],
           ),
@@ -200,7 +198,7 @@ class LugarItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               FilledButton.icon(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.black)),
                   onPressed: () {
                     mostrarAlerta(
@@ -266,7 +264,7 @@ class LugarItem extends StatelessWidget {
                       borrarEjercicio();
                     });
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     FontAwesomeIcons.trash,
                     color: Colors.red,
                   ),
@@ -275,7 +273,7 @@ class LugarItem extends StatelessWidget {
                     style: GoogleFonts.spaceGrotesk(color: Colors.red),
                   )),
               FilledButton.icon(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.black)),
                   onPressed: () {
                     mostrarAlerta(
@@ -293,7 +291,7 @@ class LugarItem extends StatelessWidget {
                       });
                     });
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     FontAwesomeIcons.solidPenToSquare,
                     color: Colors.green,
                   ),

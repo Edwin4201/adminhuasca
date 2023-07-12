@@ -62,17 +62,17 @@ class MyApp extends StatelessWidget {
                 showCloseIcon: true,
                 closeIconColor: Colors.white)),
         debugShowCheckedModeBanner: false,
-        home: LoginScreen(),
+        home: const LoginScreen(),
         routes: {
           PageRoutes.top: (context) => const TopLugaresScreen(),
           PageRoutes.comentarios: (context) => const ComentariosScreen(),
           PageRoutes.lugares: (context) => const LugaresScreen(),
           PageRoutes.visitasLugar: (context) => const VisitasLugarScreen(),
-          "agregarlugar": (context) => LugaresAgregarScreen(),
-          "editarlugar": (context) => LugaresEditarScreen(),
-          "lugares": (context) => LugaresScreen(),
-          "visitasdetalles": (context) => VisitasDetallesScreen(),
-          "auth": (context) => ComentariosScreen()
+          "agregarlugar": (context) => const LugaresAgregarScreen(),
+          "editarlugar": (context) => const LugaresEditarScreen(),
+          "lugares": (context) => const LugaresScreen(),
+          "visitasdetalles": (context) => const VisitasDetallesScreen(),
+          "auth": (context) => const ComentariosScreen()
         },
       ),
     );
