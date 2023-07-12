@@ -86,7 +86,6 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
           }
         } else {
           // La petición falló con un código de estado no exitoso
-          throw Exception('Failed to load post');
         }
 
         return comentariosNoRevisados;
@@ -255,7 +254,10 @@ class _comentarioItem extends StatelessWidget {
                 FontAwesomeIcons.star,
                 color: Colors.yellow,
               ),
-              Text("  $calif"),
+              Text(
+                "  $calif",
+                style: GoogleFonts.spaceGrotesk(color: Colors.yellow),
+              ),
             ],
           ),
           Divider(),
