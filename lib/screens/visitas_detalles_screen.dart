@@ -148,9 +148,18 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                   Colors.green,
                   Colors.pink
                 ]),
-                Text(
-                  "Total de reseñas: ${estadisticas[0].totalresenas}",
-                  style: GoogleFonts.archivoNarrow(color: Colors.black),
+                Row(
+                  children: [
+                    Text(
+                      "Total de reseñas: ",
+                      style: GoogleFonts.glegoo(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      estadisticas[0].totalresenas,
+                      style: GoogleFonts.glegoo(color: Colors.black),
+                    ),
+                  ],
                 ),
                 EstrellasItem(
                   icon1: FontAwesomeIcons.solidStar,
@@ -255,7 +264,7 @@ class _ComentarioItem extends StatelessWidget {
         children: [
           Text(
             comentario,
-            style: GoogleFonts.archivoNarrow(color: Colors.black),
+            style: GoogleFonts.glegoo(color: Colors.black),
           ),
           Row(
             children: [
@@ -265,7 +274,7 @@ class _ComentarioItem extends StatelessWidget {
               ),
               Text(
                 "  $calif",
-                style: GoogleFonts.archivoNarrow(color: Colors.black),
+                style: GoogleFonts.glegoo(color: Colors.black),
               ),
             ],
           ),
@@ -301,7 +310,8 @@ class _GraficaItem extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 20),
             child: Text(
               titulo,
-              style: GoogleFonts.archivoNarrow(color: Colors.black),
+              style: GoogleFonts.glegoo(
+                  color: Colors.black, fontWeight: FontWeight.bold),
             ),
           ),
           PieChart(

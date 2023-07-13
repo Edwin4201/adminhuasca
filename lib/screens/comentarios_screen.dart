@@ -107,13 +107,19 @@ class _ComentariosScreenState extends State<ComentariosScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Colors.black,
         shadowColor: Colors.black,
-        title: Text(comentariosNoRevisados.isEmpty
-            ? ""
-            : "Por revisar: ${comentariosNoRevisados[0].total.toString()}"),
+        title: Row(
+          children: [
+            Text(comentariosNoRevisados.isEmpty ? "" : "Por revisar: "),
+            Text(comentariosNoRevisados.isEmpty
+                ? ""
+                : comentariosNoRevisados[0].total.toString()),
+          ],
+        ),
       ),
       drawer: const Navigationdrawer(),
       body: lugares.isEmpty
@@ -203,9 +209,20 @@ class ComentarioItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Nombre lugar: $idLugar",
-            style: GoogleFonts.archivoNarrow(color: Colors.black),
+          Row(
+            children: [
+              Text(
+                "Lugar: ",
+                style: GoogleFonts.glegoo(
+                    color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                idLugar,
+                style: GoogleFonts.glegoo(
+                  color: Colors.black,
+                ),
+              ),
+            ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -214,11 +231,11 @@ class ComentarioItem extends StatelessWidget {
                 children: [
                   Text(
                     fecha.substring(0, 10),
-                    style: GoogleFonts.archivoNarrow(color: Colors.black),
+                    style: GoogleFonts.glegoo(color: Colors.black),
                   ),
                   Text(
                     hora,
-                    style: GoogleFonts.archivoNarrow(color: Colors.black),
+                    style: GoogleFonts.glegoo(color: Colors.black),
                   ),
                 ],
               ),
@@ -244,19 +261,39 @@ class ComentarioItem extends StatelessWidget {
             color: Colors.black26,
             thickness: 5,
           ),
-          Text(
-            "ID comentario: $idComentario",
-            style: GoogleFonts.archivoNarrow(color: Colors.black),
-            textAlign: TextAlign.left,
+          Row(
+            children: [
+              Text(
+                "ID comentario: ",
+                style: GoogleFonts.glegoo(
+                    color: Colors.black, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
+              ),
+              Text(
+                idComentario,
+                style: GoogleFonts.glegoo(color: Colors.black),
+                textAlign: TextAlign.left,
+              ),
+            ],
           ),
-          Text(
-            "ID visita: $idVisita",
-            style: GoogleFonts.archivoNarrow(color: Colors.black),
-            textAlign: TextAlign.left,
+          Row(
+            children: [
+              Text(
+                "ID visita: ",
+                style: GoogleFonts.glegoo(
+                    color: Colors.black, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
+              ),
+              Text(
+                idVisita,
+                style: GoogleFonts.glegoo(color: Colors.black),
+                textAlign: TextAlign.left,
+              ),
+            ],
           ),
           Text(
             comentario,
-            style: GoogleFonts.archivoNarrow(color: Colors.black),
+            style: GoogleFonts.glegoo(color: Colors.black),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -332,7 +369,7 @@ class ComentarioItem extends StatelessWidget {
                   ),
                   label: Text(
                     "Rechazar",
-                    style: GoogleFonts.archivoNarrow(color: Colors.white),
+                    style: GoogleFonts.glegoo(color: Colors.white),
                   )),
               FilledButton.icon(
                   style: const ButtonStyle(
@@ -404,7 +441,7 @@ class ComentarioItem extends StatelessWidget {
                   ),
                   label: Text(
                     "Aceptar",
-                    style: GoogleFonts.archivoNarrow(color: Colors.white),
+                    style: GoogleFonts.glegoo(color: Colors.white),
                   )),
             ],
           )

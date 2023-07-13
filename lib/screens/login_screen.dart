@@ -35,7 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
         _authorized = 'Authenticating';
       });
       authenticated = await auth.authenticate(
-        localizedReason: 'Let OS determine authentication method',
+        localizedReason:
+            'Dejar que el sistema operativo determine el método de autenticación.',
         options: const AuthenticationOptions(
           stickyAuth: true,
         ),
@@ -84,12 +85,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 else if (_supportState == _SupportState.supported)
                   Text(
                     'Este dispositivo es compatible',
-                    style: GoogleFonts.archivoNarrow(color: Colors.green),
+                    style: GoogleFonts.glegoo(color: Colors.green),
                   )
                 else
                   Text(
                     'Este dispositivo no es compatible',
-                    style: GoogleFonts.archivoNarrow(color: Colors.red),
+                    style: GoogleFonts.glegoo(color: Colors.red),
                   ),
                 const Divider(
                   height: 100,
@@ -98,11 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (_isAuthenticating)
                   ElevatedButton(
                     onPressed: _cancelAuthentication,
-                    // TODO(goderbauer): Make this const when this package requires Flutter 3.8 or later.
-                    // ignore: prefer_const_constructors
-                    child: Row(
+                    child: const Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: const <Widget>[
+                      children: <Widget>[
                         Text('Cancel Authentication'),
                         Icon(Icons.cancel),
                       ],

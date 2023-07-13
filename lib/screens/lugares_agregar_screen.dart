@@ -205,7 +205,7 @@ class _LugaresAgregarScreenState extends State<LugaresAgregarScreen> {
               ),
               label: Text(
                 "Agregar",
-                style: GoogleFonts.archivoNarrow(color: Colors.white),
+                style: GoogleFonts.glegoo(color: Colors.white),
               )),
         ],
       ),

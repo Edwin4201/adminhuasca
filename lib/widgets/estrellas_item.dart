@@ -70,7 +70,7 @@ class EstrellasItem extends StatelessWidget {
           flex: 2,
           child: Text(
             "${(valor * 100).toStringAsFixed(2)}%",
-            style: GoogleFonts.archivoNarrow(
+            style: GoogleFonts.glegoo(
               color: Colors.black,
               fontSize: MediaQuery.of(context).size.height * 0.018,
             ),

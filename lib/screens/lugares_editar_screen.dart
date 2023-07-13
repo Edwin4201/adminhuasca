@@ -127,7 +127,7 @@ class _LugaresAgregarScreenState extends State<LugaresEditarScreen> {
               ),
               label: Text(
                 "Actualizar",
-                style: GoogleFonts.archivoNarrow(color: Colors.black),
+                style: GoogleFonts.glegoo(color: Colors.black),
               )),
         ],
       ),

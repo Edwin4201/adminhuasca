@@ -122,26 +122,44 @@ class _LugaresItem extends StatelessWidget {
       children: [
         Text(
           nombre,
-          style: GoogleFonts.archivoNarrow(color: Colors.black),
+          style: GoogleFonts.glegoo(color: Colors.black),
         ),
-        Text(
-          "Total de visitantes: $visitas",
-          style: GoogleFonts.archivoNarrow(color: Colors.black),
+        Row(
+          children: [
+            Text(
+              "Total de visitantes: ",
+              style: GoogleFonts.glegoo(
+                  color: Colors.black, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              visitas,
+              style: GoogleFonts.glegoo(color: Colors.black),
+            ),
+          ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const Icon(
+            Icon(
               FontAwesomeIcons.star,
-              color: Colors.yellow,
+              color: Colors.yellow[600],
             ),
             Text(
               "  ${calificacion.substring(0, 3)}",
-              style: GoogleFonts.archivoNarrow(color: Colors.black),
+              style: GoogleFonts.glegoo(color: Colors.black),
             ),
-            Text(
-              " Total de reseñas: $total",
-              style: GoogleFonts.archivoNarrow(color: Colors.black),
+            Row(
+              children: [
+                Text(
+                  " Total de reseñas: ",
+                  style: GoogleFonts.glegoo(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  total,
+                  style: GoogleFonts.glegoo(color: Colors.black),
+                ),
+              ],
             )
           ],
         ),

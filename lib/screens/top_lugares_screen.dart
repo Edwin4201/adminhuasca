@@ -118,7 +118,7 @@ class _LugaresItem extends StatelessWidget {
       children: [
         Text(
           nombre,
-          style: GoogleFonts.archivoNarrow(color: Colors.black),
+          style: GoogleFonts.glegoo(color: Colors.black),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -129,11 +129,11 @@ class _LugaresItem extends StatelessWidget {
             ),
             Text(
               " ${calificacion.substring(0, 3)}",
-              style: GoogleFonts.archivoNarrow(color: Colors.black),
+              style: GoogleFonts.glegoo(color: Colors.black),
             ),
             Text(
               " ($total)",
-              style: GoogleFonts.archivoNarrow(color: Colors.black),
+              style: GoogleFonts.glegoo(color: Colors.black),
             )
           ],
         ),

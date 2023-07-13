@@ -62,8 +62,8 @@ class MyApp extends StatelessWidget {
                 showCloseIcon: true,
                 closeIconColor: Colors.white)),
         debugShowCheckedModeBanner: false,
-        //  home: const LoginScreen(),
-        home: ComentariosScreen(),
+        home: const LoginScreen(),
+        //home: ComentariosScreen(),
 
         routes: {
           PageRoutes.top: (context) => const TopLugaresScreen(),

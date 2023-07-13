@@ -9,14 +9,14 @@ Widget createDrawerBodyItem(
     title: Row(
       children: <Widget>[
         CircleAvatar(
-          child: Icon(icon, color: Colors.white),
           backgroundColor: Colors.green[400],
+          child: Icon(icon, color: Colors.white),
         ),
         Expanded(
           child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(text,
-                  style: GoogleFonts.archivoNarrow(
+                  style: GoogleFonts.glegoo(
                       fontWeight: FontWeight.bold,
                       color: Colors.black54,
                       fontSize: 15))),

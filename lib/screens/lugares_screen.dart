@@ -143,38 +143,58 @@ class LugarItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "Id=$idLugar",
-                style: GoogleFonts.archivoNarrow(color: Colors.black),
+                "Id: ",
+                style: GoogleFonts.glegoo(
+                    color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                idLugar,
+                style: GoogleFonts.glegoo(color: Colors.black),
               ),
             ],
           ),
           Row(
             children: [
+              Text(
+                "Nombre: ",
+                style: GoogleFonts.glegoo(
+                    color: Colors.black, fontWeight: FontWeight.bold),
+              ),
               Text(
                 nombre,
-                style: GoogleFonts.archivoNarrow(color: Colors.black),
+                style: GoogleFonts.glegoo(color: Colors.black),
               ),
             ],
           ),
           Row(
             children: [
               Text(
-                "Estado: $idEstado",
-                style: GoogleFonts.archivoNarrow(color: Colors.black),
+                "Estado: ",
+                style: GoogleFonts.glegoo(
+                    color: Colors.black, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
+              ),
+              Text(
+                idEstado,
+                style: GoogleFonts.glegoo(color: Colors.black),
                 textAlign: TextAlign.left,
               ),
             ],
           ),
           Row(
             children: [
-              Expanded(
-                  child: Text(
-                "Comentarios= $totalComentarios",
-                style: GoogleFonts.archivoNarrow(color: Colors.black),
-              ))
+              Text(
+                "Comentarios= ",
+                style: GoogleFonts.glegoo(
+                    color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                totalComentarios,
+                style: GoogleFonts.glegoo(color: Colors.black),
+              )
             ],
           ),
           Row(
@@ -272,7 +292,7 @@ class LugarItem extends StatelessWidget {
                   ),
                   label: Text(
                     "Borrar",
-                    style: GoogleFonts.archivoNarrow(color: Colors.white),
+                    style: GoogleFonts.glegoo(color: Colors.white),
                   )),
               FilledButton.icon(
                   style: const ButtonStyle(
@@ -299,7 +319,7 @@ class LugarItem extends StatelessWidget {
                   ),
                   label: Text(
                     "Editar",
-                    style: GoogleFonts.archivoNarrow(color: Colors.white),
+                    style: GoogleFonts.glegoo(color: Colors.white),
                   ))
             ],
           ),
