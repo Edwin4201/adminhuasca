@@ -81,7 +81,8 @@ class _TopLugaresScreenState extends State<TopLugaresScreen> {
                       onTap: () {
                         Navigator.pushNamed(context, "visitasdetalles",
                             arguments: {
-                              "idlugar": lugares[0].response[index].idLugar
+                              "idlugar": lugares[0].response[index].idLugar,
+                              "nombre": lugares[0].response[index].nombre
                             });
                       },
                       child: _LugaresItem(

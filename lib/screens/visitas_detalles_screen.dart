@@ -107,7 +107,7 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         foregroundColor: Colors.black,
-        title: Text("Estadisticas ${parametros["idlugar"]}"),
+        title: Text("Estadisticas ${parametros["nombre"]}"),
       ),
       body: ListView(
         padding: const EdgeInsets.only(left: 10, right: 10),
@@ -158,8 +158,10 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                   icon3: FontAwesomeIcons.solidStar,
                   icon4: FontAwesomeIcons.solidStar,
                   icon5: FontAwesomeIcons.solidStar,
-                  valor: ((double.parse(estadisticas[0].cinco)) /
-                      (double.parse(estadisticas[0].totalresenas))),
+                  valor: estadisticas[0].cinco == "0"
+                      ? 0.0
+                      : ((double.parse(estadisticas[0].cinco)) /
+                          (double.parse(estadisticas[0].totalresenas))),
                 ),
                 EstrellasItem(
                   icon1: FontAwesomeIcons.solidStar,
@@ -167,8 +169,10 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                   icon3: FontAwesomeIcons.solidStar,
                   icon4: FontAwesomeIcons.solidStar,
                   icon5: FontAwesomeIcons.star,
-                  valor: ((double.parse(estadisticas[0].cuatro)) /
-                      (double.parse(estadisticas[0].totalresenas))),
+                  valor: estadisticas[0].cuatro == "0"
+                      ? 0.0
+                      : ((double.parse(estadisticas[0].cuatro)) /
+                          (double.parse(estadisticas[0].totalresenas))),
                 ),
                 EstrellasItem(
                   icon1: FontAwesomeIcons.solidStar,
@@ -176,8 +180,10 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                   icon3: FontAwesomeIcons.solidStar,
                   icon4: FontAwesomeIcons.star,
                   icon5: FontAwesomeIcons.star,
-                  valor: ((double.parse(estadisticas[0].tres)) /
-                      (double.parse(estadisticas[0].totalresenas))),
+                  valor: estadisticas[0].tres == "0"
+                      ? 0.0
+                      : ((double.parse(estadisticas[0].tres)) /
+                          (double.parse(estadisticas[0].totalresenas))),
                 ),
                 EstrellasItem(
                   icon1: FontAwesomeIcons.solidStar,
@@ -185,8 +191,10 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                   icon3: FontAwesomeIcons.star,
                   icon4: FontAwesomeIcons.star,
                   icon5: FontAwesomeIcons.star,
-                  valor: ((double.parse(estadisticas[0].dos)) /
-                      (double.parse(estadisticas[0].totalresenas))),
+                  valor: estadisticas[0].dos == "0"
+                      ? 0.0
+                      : ((double.parse(estadisticas[0].dos)) /
+                          (double.parse(estadisticas[0].totalresenas))),
                 ),
                 EstrellasItem(
                   icon1: FontAwesomeIcons.solidStar,
@@ -194,8 +202,10 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                   icon3: FontAwesomeIcons.star,
                   icon4: FontAwesomeIcons.star,
                   icon5: FontAwesomeIcons.star,
-                  valor: ((double.parse(estadisticas[0].uno)) /
-                      (double.parse(estadisticas[0].totalresenas))),
+                  valor: estadisticas[0].uno == "0"
+                      ? 0.0
+                      : ((double.parse(estadisticas[0].uno)) /
+                          (double.parse(estadisticas[0].totalresenas))),
                 ),
                 comentariosNoRevisados.isEmpty
                     ? Container()

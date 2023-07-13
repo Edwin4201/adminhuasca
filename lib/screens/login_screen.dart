@@ -13,8 +13,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final LocalAuthentication auth = LocalAuthentication();
   _SupportState _supportState = _SupportState.unknown;
-  bool? _canCheckBiometrics;
-  List<BiometricType>? _availableBiometrics;
+
   String _authorized = 'Not Authorized';
   bool _isAuthenticating = false;
 
@@ -26,38 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ? _SupportState.supported
               : _SupportState.unsupported),
         );
-  }
-
-  Future<void> _checkBiometrics() async {
-    late bool canCheckBiometrics;
-    try {
-      canCheckBiometrics = await auth.canCheckBiometrics;
-    } on PlatformException catch (e) {
-      canCheckBiometrics = false;
-    }
-    if (!mounted) {
-      return;
-    }
-
-    setState(() {
-      _canCheckBiometrics = canCheckBiometrics;
-    });
-  }
-
-  Future<void> _getAvailableBiometrics() async {
-    late List<BiometricType> availableBiometrics;
-    try {
-      availableBiometrics = await auth.getAvailableBiometrics();
-    } on PlatformException catch (e) {
-      availableBiometrics = <BiometricType>[];
-    }
-    if (!mounted) {
-      return;
-    }
-
-    setState(() {
-      _availableBiometrics = availableBiometrics;
-    });
   }
 
   Future<void> _authenticate() async {

@@ -39,11 +39,11 @@ class _LugaresAgregarScreenState extends State<LugaresEditarScreen> {
               });
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: Colors.green,
+        foregroundColor: Colors.black,
         title: const Text("Editar lugar"),
       ),
       body: ListView(

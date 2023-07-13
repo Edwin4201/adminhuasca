@@ -54,7 +54,7 @@ class CampoDeTextoLn extends StatelessWidget {
             label: Text(label),
             floatingLabelAlignment: FloatingLabelAlignment.center,
             floatingLabelStyle: TextStyle(
-                color: Colors.yellow,
+                color: Colors.blue,
                 fontSize: MediaQuery.of(context).size.width >= 600
                     ? MediaQuery.of(context).size.width * .035
                     : 18),

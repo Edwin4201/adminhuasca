@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:adminhuasca/global/enviroment.dart';
 import 'package:adminhuasca/models/com_no_revisados.dart';
+import 'package:adminhuasca/models/lugares.dart';
 import 'package:adminhuasca/navigationDrawer/navigationdrawer.dart';
 import 'package:adminhuasca/widgets/error_internet_dialog.dart';
 import 'package:adminhuasca/widgets/mostrar_alerta.dart';
@@ -24,6 +25,7 @@ class ComentariosScreen extends StatefulWidget {
 
 class _ComentariosScreenState extends State<ComentariosScreen> {
   List<ComNoRevisados> comentariosNoRevisados = [];
+  List<Lugares> lugares = [];
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,43 @@ class _ComentariosScreenState extends State<ComentariosScreen> {
     }
 
     cargarComentariosNoRevisados();
+    Future<List<Lugares>> cargarLugares() async {
+      try {
+        final url = Uri.parse(
+          '${Environment.apiUrl}/api/v1/lugar',
+        );
+        final resp = await http.get(
+          url,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            "apikey": Environment.basicAuth
+          },
+        );
+        if (resp.statusCode == 200) {
+          final Lugares estadosMap = Lugares.fromJson(jsonDecode(resp.body));
+          if (mounted) {
+            setState(() {
+              lugares = [estadosMap];
+            });
+          }
+        } else {
+          // La petición falló con un código de estado no exitoso
+          throw Exception('Failed to load post');
+        }
+
+        return lugares;
+      } on TimeoutException catch (_) {
+        throw ('Tiempo de espera alcanzado');
+      } on SocketException {
+        throw ('Sin internet  o falla de servidor ');
+      } on HttpException {
+        throw ("No se encontro esa peticion");
+      } on FormatException {
+        throw ("Formato erroneo ");
+      }
+    }
+
+    cargarLugares();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -77,42 +116,56 @@ class _ComentariosScreenState extends State<ComentariosScreen> {
             : "Por revisar: ${comentariosNoRevisados[0].total.toString()}"),
       ),
       drawer: const Navigationdrawer(),
-      body: ListView(
-        children: comentariosNoRevisados.isEmpty
-            ? []
-            : List.generate(
-                comentariosNoRevisados[0].response.length,
-                (index) => ComentarioItem(
-                      idComentario: comentariosNoRevisados[0]
-                          .response[index]
-                          .idComentarios
-                          .toString(),
-                      idLugar: comentariosNoRevisados[0]
-                          .response[index]
-                          .idLugar
-                          .toString(),
-                      idVisita: comentariosNoRevisados[0]
-                          .response[index]
-                          .idVisita
-                          .toString(),
-                      comentario: comentariosNoRevisados[0]
-                          .response[index]
-                          .comentario
-                          .toString(),
-                      calificacion: comentariosNoRevisados[0]
-                          .response[index]
-                          .calificacion
-                          .toString(),
-                      fecha: comentariosNoRevisados[0]
-                          .response[index]
-                          .fecha
-                          .toString(),
-                      hora: comentariosNoRevisados[0]
-                          .response[index]
-                          .hora
-                          .toString(),
-                    )),
-      ),
+      body: lugares.isEmpty
+          ? Container()
+          : ListView(
+              children: comentariosNoRevisados.isEmpty
+                  ? []
+                  : List.generate(
+                      comentariosNoRevisados[0].response.length,
+                      (index) => ComentarioItem(
+                            idComentario: comentariosNoRevisados[0]
+                                .response[index]
+                                .idComentarios
+                                .toString(),
+                            idLugar: lugares[0]
+                                .response
+                                .where(
+                                  (element) =>
+                                      element.idLugar ==
+                                      comentariosNoRevisados[0]
+                                          .response[index]
+                                          .idLugar,
+                                )
+                                .toList()[0]
+                                .nombre
+                                .toString(),
+                            /*      comentariosNoRevisados[0]
+                              .response[index]
+                              .idLugar
+                              .toString(), */
+                            idVisita: comentariosNoRevisados[0]
+                                .response[index]
+                                .idVisita
+                                .toString(),
+                            comentario: comentariosNoRevisados[0]
+                                .response[index]
+                                .comentario
+                                .toString(),
+                            calificacion: comentariosNoRevisados[0]
+                                .response[index]
+                                .calificacion
+                                .toString(),
+                            fecha: comentariosNoRevisados[0]
+                                .response[index]
+                                .fecha
+                                .toString(),
+                            hora: comentariosNoRevisados[0]
+                                .response[index]
+                                .hora
+                                .toString(),
+                          )),
+            ),
     );
   }
 }
