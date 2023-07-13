@@ -62,11 +62,11 @@ class _VisitasLugarScreenState extends State<VisitasLugarScreen> {
 
     cargarLugares();
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: Colors.green,
+        foregroundColor: Colors.black,
         title: const Text("Visitantes por lugar"),
       ),
       drawer: const Navigationdrawer(),
@@ -121,11 +121,11 @@ class _LugaresItem extends StatelessWidget {
       children: [
         Text(
           nombre,
-          style: GoogleFonts.spaceGrotesk(color: Colors.green),
+          style: GoogleFonts.archivoNarrow(color: Colors.black),
         ),
         Text(
           "Total de visitantes: $visitas",
-          style: GoogleFonts.spaceGrotesk(color: Colors.green),
+          style: GoogleFonts.archivoNarrow(color: Colors.black),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -136,16 +136,16 @@ class _LugaresItem extends StatelessWidget {
             ),
             Text(
               "  ${calificacion.substring(0, 3)}",
-              style: GoogleFonts.spaceGrotesk(color: Colors.green),
+              style: GoogleFonts.archivoNarrow(color: Colors.black),
             ),
             Text(
               " Total de reseñas: $total",
-              style: GoogleFonts.spaceGrotesk(color: Colors.green),
+              style: GoogleFonts.archivoNarrow(color: Colors.black),
             )
           ],
         ),
         const Divider(
-          color: Colors.lightGreenAccent,
+          color: Colors.grey,
         )
       ],
     );

@@ -11,7 +11,7 @@ class Navigationdrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       child: ListView(
         //cambiar por conteiner para poner color
         padding: EdgeInsets.zero,

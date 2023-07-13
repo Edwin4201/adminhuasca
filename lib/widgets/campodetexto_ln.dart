@@ -38,14 +38,14 @@ class CampoDeTextoLn extends StatelessWidget {
           onChanged: onCambio,
           readOnly: isreadOnly!,
           style: TextStyle(
-              color: Colors.green,
+              color: Colors.black,
               fontSize: MediaQuery.of(context).size.width >= 600
                   ? MediaQuery.of(context).size.width * .028
                   : 16),
           //  enabled: enabled,
           maxLines: maximasLineas,
           maxLength: largo,
-          cursorColor: Colors.green,
+          cursorColor: Colors.blue,
           decoration: InputDecoration(
             prefix: Padding(
               padding: const EdgeInsets.only(right: 5),
@@ -54,7 +54,7 @@ class CampoDeTextoLn extends StatelessWidget {
             label: Text(label),
             floatingLabelAlignment: FloatingLabelAlignment.center,
             floatingLabelStyle: TextStyle(
-                color: Colors.green,
+                color: Colors.yellow,
                 fontSize: MediaQuery.of(context).size.width >= 600
                     ? MediaQuery.of(context).size.width * .035
                     : 18),
@@ -62,15 +62,15 @@ class CampoDeTextoLn extends StatelessWidget {
 
             hintText: "Ingresa $label",
             filled: true,
-            fillColor: Colors.black,
+            fillColor: Colors.white,
             border: const OutlineInputBorder(),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(color: Colors.green[400]!, width: 2.0),
+              borderSide: BorderSide(color: Colors.orange[400]!, width: 2.0),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(color: Colors.green, width: 2.0),
+              borderSide: const BorderSide(color: Colors.orange, width: 2.0),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),

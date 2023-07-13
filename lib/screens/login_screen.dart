@@ -102,9 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.white,
         ),
         body: ListView(
           padding: const EdgeInsets.only(top: 30),
@@ -117,50 +117,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 else if (_supportState == _SupportState.supported)
                   Text(
                     'Este dispositivo es compatible',
-                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                    style: GoogleFonts.archivoNarrow(color: Colors.green),
                   )
                 else
                   Text(
                     'Este dispositivo no es compatible',
-                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                    style: GoogleFonts.archivoNarrow(color: Colors.red),
                   ),
                 const Divider(
                   height: 100,
-                  color: Colors.lightGreenAccent,
-                ),
-                Text(
-                  'Puede comprobar datos biométricos: $_canCheckBiometrics\n',
-                  style: GoogleFonts.spaceGrotesk(color: Colors.green),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white),
-                  onPressed: _checkBiometrics,
-                  child: const Text('Comprobar datos biométricos'),
-                ),
-                const Divider(
-                  height: 100,
-                  color: Colors.lightGreenAccent,
-                ),
-                Text(
-                  'Biometría disponible: $_availableBiometrics\n',
-                  style: GoogleFonts.spaceGrotesk(color: Colors.green),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white),
-                  onPressed: _getAvailableBiometrics,
-                  child: const Text('Obtenga datos biométricos disponibles'),
-                ),
-                const Divider(
-                  height: 100,
-                  color: Colors.lightGreenAccent,
-                ),
-                Text(
-                  'Estado actual: $_authorized\n',
-                  style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  color: Colors.black,
                 ),
                 if (_isAuthenticating)
                   ElevatedButton(
@@ -180,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: <Widget>[
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green,
+                            backgroundColor: Colors.blue,
                             foregroundColor: Colors.white),
                         onPressed: _authenticate,
                         child: const Row(
@@ -188,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: <Widget>[
                             Icon(
                               Icons.fingerprint,
-                              size: 50,
+                              size: 100,
                             ),
                           ],
                         ),

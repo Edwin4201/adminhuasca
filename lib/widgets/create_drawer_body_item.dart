@@ -8,14 +8,17 @@ Widget createDrawerBodyItem(
   return ListTile(
     title: Row(
       children: <Widget>[
-        Icon(icon, color: Colors.lightGreenAccent),
+        CircleAvatar(
+          child: Icon(icon, color: Colors.white),
+          backgroundColor: Colors.green[400],
+        ),
         Expanded(
           child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(text,
-                  style: GoogleFonts.spaceGrotesk(
+                  style: GoogleFonts.archivoNarrow(
                       fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                      color: Colors.black54,
                       fontSize: 15))),
         )
       ],

@@ -27,8 +27,8 @@ class EstrellasItem extends StatelessWidget {
         Expanded(
           flex: 5,
           child: LinearProgressIndicator(
-            color: Colors.green[800],
-            backgroundColor: Colors.green[100],
+            color: Colors.blue,
+            backgroundColor: Colors.blue[100],
             minHeight: 15,
             value: valor,
           ),
@@ -70,8 +70,8 @@ class EstrellasItem extends StatelessWidget {
           flex: 2,
           child: Text(
             "${(valor * 100).toStringAsFixed(2)}%",
-            style: GoogleFonts.spaceGrotesk(
-              color: Colors.green,
+            style: GoogleFonts.archivoNarrow(
+              color: Colors.black,
               fontSize: MediaQuery.of(context).size.height * 0.018,
             ),
           ),

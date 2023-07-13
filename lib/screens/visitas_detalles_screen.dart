@@ -102,11 +102,11 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
 
     cargarComentariosNoAceptados();
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: Colors.green,
+        foregroundColor: Colors.black,
         title: Text("Estadisticas ${parametros["idlugar"]}"),
       ),
       body: ListView(
@@ -149,8 +149,8 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                   Colors.pink
                 ]),
                 Text(
-                  "Total de reseñas ${estadisticas[0].totalresenas}",
-                  style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                  "Total de reseñas: ${estadisticas[0].totalresenas}",
+                  style: GoogleFonts.archivoNarrow(color: Colors.black),
                 ),
                 EstrellasItem(
                   icon1: FontAwesomeIcons.solidStar,
@@ -205,7 +205,7 @@ class _VisitasDetallesScreenState extends State<VisitasDetallesScreen> {
                         padding: const EdgeInsets.all(25),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.lightGreenAccent)),
+                            border: Border.all(color: Colors.grey)),
                         child: ListView(
                           children: List.generate(
                               comentariosNoRevisados[0].response.length,
@@ -245,7 +245,7 @@ class _ComentarioItem extends StatelessWidget {
         children: [
           Text(
             comentario,
-            style: GoogleFonts.spaceGrotesk(color: Colors.green),
+            style: GoogleFonts.archivoNarrow(color: Colors.black),
           ),
           Row(
             children: [
@@ -255,7 +255,7 @@ class _ComentarioItem extends StatelessWidget {
               ),
               Text(
                 "  $calif",
-                style: GoogleFonts.spaceGrotesk(color: Colors.yellow),
+                style: GoogleFonts.archivoNarrow(color: Colors.black),
               ),
             ],
           ),
@@ -283,7 +283,7 @@ class _GraficaItem extends StatelessWidget {
       padding: const EdgeInsets.all(25),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.lightGreenAccent)),
+          border: Border.all(color: Colors.grey)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -291,7 +291,7 @@ class _GraficaItem extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 20),
             child: Text(
               titulo,
-              style: GoogleFonts.spaceGrotesk(color: Colors.green),
+              style: GoogleFonts.archivoNarrow(color: Colors.black),
             ),
           ),
           PieChart(
@@ -311,7 +311,7 @@ class _GraficaItem extends StatelessWidget {
               showLegends: true,
               legendShape: BoxShape.circle,
               legendTextStyle:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             chartValuesOptions: const ChartValuesOptions(
               showChartValueBackground: true,

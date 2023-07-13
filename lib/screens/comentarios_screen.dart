@@ -66,11 +66,11 @@ class _ComentariosScreenState extends State<ComentariosScreen> {
 
     cargarComentariosNoRevisados();
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: Colors.green,
+        foregroundColor: Colors.black,
         shadowColor: Colors.black,
         title: Text(comentariosNoRevisados.isEmpty
             ? ""
@@ -143,14 +143,16 @@ class ComentarioItem extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: Colors.grey[900],
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all()),
+          border: Border.all(color: Colors.grey)),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "Nombre lugar: $idLugar",
-            style: GoogleFonts.spaceGrotesk(color: Colors.green),
+            style: GoogleFonts.archivoNarrow(color: Colors.black),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -159,11 +161,11 @@ class ComentarioItem extends StatelessWidget {
                 children: [
                   Text(
                     fecha.substring(0, 10),
-                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                    style: GoogleFonts.archivoNarrow(color: Colors.black),
                   ),
                   Text(
                     hora,
-                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                    style: GoogleFonts.archivoNarrow(color: Colors.black),
                   ),
                 ],
               ),
@@ -178,7 +180,7 @@ class ComentarioItem extends StatelessWidget {
                   itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                   itemBuilder: (context, _) => const Icon(
                     FontAwesomeIcons.star,
-                    color: Colors.lightGreenAccent,
+                    color: Colors.yellow,
                   ),
                   onRatingUpdate: (rating) {},
                 ),
@@ -186,29 +188,29 @@ class ComentarioItem extends StatelessWidget {
             ],
           ),
           const Divider(
-            color: Colors.black,
+            color: Colors.black26,
             thickness: 5,
           ),
           Text(
             "ID comentario: $idComentario",
-            style: GoogleFonts.spaceGrotesk(color: Colors.white),
+            style: GoogleFonts.archivoNarrow(color: Colors.black),
             textAlign: TextAlign.left,
           ),
           Text(
             "ID visita: $idVisita",
-            style: GoogleFonts.spaceGrotesk(color: Colors.white),
+            style: GoogleFonts.archivoNarrow(color: Colors.black),
             textAlign: TextAlign.left,
           ),
           Text(
             comentario,
-            style: GoogleFonts.spaceGrotesk(color: Colors.green),
+            style: GoogleFonts.archivoNarrow(color: Colors.black),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               FilledButton.icon(
                   style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
+                      backgroundColor: MaterialStatePropertyAll(Colors.red)),
                   onPressed: () {
                     mostrarAlerta(context, "¡Atención!",
                         "Desea rechazar este comentario?", "Aceptar", () {
@@ -273,15 +275,15 @@ class ComentarioItem extends StatelessWidget {
                   },
                   icon: const Icon(
                     FontAwesomeIcons.trash,
-                    color: Colors.red,
+                    color: Colors.white,
                   ),
                   label: Text(
                     "Rechazar",
-                    style: GoogleFonts.spaceGrotesk(color: Colors.red),
+                    style: GoogleFonts.archivoNarrow(color: Colors.white),
                   )),
               FilledButton.icon(
                   style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
+                      backgroundColor: MaterialStatePropertyAll(Colors.green)),
                   onPressed: () {
                     mostrarAlerta(context, "¡Atención!",
                         "Desea aceptar este comentario?", "Aceptar", () {
@@ -345,11 +347,11 @@ class ComentarioItem extends StatelessWidget {
                   },
                   icon: const Icon(
                     FontAwesomeIcons.check,
-                    color: Colors.green,
+                    color: Colors.white,
                   ),
                   label: Text(
                     "Aceptar",
-                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                    style: GoogleFonts.archivoNarrow(color: Colors.white),
                   )),
             ],
           )

@@ -66,11 +66,11 @@ class _LugaresScreenState extends State<LugaresScreen> {
     cargarLugares();
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.white,
           elevation: 0,
-          foregroundColor: Colors.green,
+          foregroundColor: Colors.black,
           shadowColor: Colors.black,
           title: const Text("Gestionar lugares")),
       drawer: const Navigationdrawer(),
@@ -135,17 +135,19 @@ class LugarItem extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       decoration: BoxDecoration(
-          color: Colors.grey[900],
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all()),
+          border: Border.all(color: Colors.grey)),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
                 "Id=$idLugar",
-                style: GoogleFonts.spaceGrotesk(color: Colors.lightGreenAccent),
+                style: GoogleFonts.archivoNarrow(color: Colors.black),
               ),
             ],
           ),
@@ -153,7 +155,7 @@ class LugarItem extends StatelessWidget {
             children: [
               Text(
                 nombre,
-                style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                style: GoogleFonts.archivoNarrow(color: Colors.black),
               ),
             ],
           ),
@@ -161,7 +163,7 @@ class LugarItem extends StatelessWidget {
             children: [
               Text(
                 "Estado: $idEstado",
-                style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                style: GoogleFonts.archivoNarrow(color: Colors.black),
                 textAlign: TextAlign.left,
               ),
             ],
@@ -171,7 +173,7 @@ class LugarItem extends StatelessWidget {
               Expanded(
                   child: Text(
                 "Comentarios= $totalComentarios",
-                style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                style: GoogleFonts.archivoNarrow(color: Colors.black),
               ))
             ],
           ),
@@ -187,7 +189,7 @@ class LugarItem extends StatelessWidget {
                 itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => const Icon(
                   FontAwesomeIcons.star,
-                  color: Colors.lightGreenAccent,
+                  color: Colors.yellow,
                 ),
                 onRatingUpdate: (rating) {},
               ),
@@ -199,7 +201,7 @@ class LugarItem extends StatelessWidget {
             children: [
               FilledButton.icon(
                   style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
+                      backgroundColor: MaterialStatePropertyAll(Colors.red)),
                   onPressed: () {
                     mostrarAlerta(
                         context,
@@ -266,15 +268,15 @@ class LugarItem extends StatelessWidget {
                   },
                   icon: const Icon(
                     FontAwesomeIcons.trash,
-                    color: Colors.red,
+                    color: Colors.white,
                   ),
                   label: Text(
                     "Borrar",
-                    style: GoogleFonts.spaceGrotesk(color: Colors.red),
+                    style: GoogleFonts.archivoNarrow(color: Colors.white),
                   )),
               FilledButton.icon(
                   style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.black)),
+                      backgroundColor: MaterialStatePropertyAll(Colors.green)),
                   onPressed: () {
                     mostrarAlerta(
                         context,
@@ -293,11 +295,11 @@ class LugarItem extends StatelessWidget {
                   },
                   icon: const Icon(
                     FontAwesomeIcons.solidPenToSquare,
-                    color: Colors.green,
+                    color: Colors.white,
                   ),
                   label: Text(
                     "Editar",
-                    style: GoogleFonts.spaceGrotesk(color: Colors.green),
+                    style: GoogleFonts.archivoNarrow(color: Colors.white),
                   ))
             ],
           ),

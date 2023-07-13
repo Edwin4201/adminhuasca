@@ -32,11 +32,11 @@ class _LugaresAgregarScreenState extends State<LugaresAgregarScreen> {
     final estadosService = Provider.of<EstadosService>(context);
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         elevation: 0,
-        foregroundColor: Colors.green,
+        foregroundColor: Colors.black,
         title: const Text("Agregar nuevo lugar"),
       ),
       body: ListView(
@@ -89,7 +89,7 @@ class _LugaresAgregarScreenState extends State<LugaresAgregarScreen> {
                         color: Colors.white,
                         icon: const Icon(
                           FontAwesomeIcons.caretDown,
-                          color: Colors.lightGreenAccent,
+                          color: Colors.blue,
                         ),
                         itemBuilder: (context) => List.generate(
                               estadosService.estados[0].response.length,
@@ -125,7 +125,7 @@ class _LugaresAgregarScreenState extends State<LugaresAgregarScreen> {
               )),
           FilledButton.icon(
               style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.orange)),
+                  backgroundColor: MaterialStatePropertyAll(Colors.green)),
               onPressed: () {
                 if (_formKey1.currentState!.validate()) {
                   mostrarAlerta(context, "¡Atención!",
@@ -201,11 +201,11 @@ class _LugaresAgregarScreenState extends State<LugaresAgregarScreen> {
               },
               icon: const Icon(
                 FontAwesomeIcons.check,
-                color: Colors.black,
+                color: Colors.white,
               ),
               label: Text(
                 "Agregar",
-                style: GoogleFonts.spaceGrotesk(color: Colors.black),
+                style: GoogleFonts.archivoNarrow(color: Colors.white),
               )),
         ],
       ),
