@@ -8,7 +8,7 @@ errorinternetdialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        content: const Text("Sin conexión a internt"),
+        content: const Text("Sin conexión a internet"),
         actions: [
           TextButton(
             onPressed: () {
